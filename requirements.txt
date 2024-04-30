@@ -1,0 +1,10 @@
+numpy
+matplotlib
+gurobipy
+pandas
+tdqm
+intervaltree
+pyarrow
+scienceplots
+lz4
+notebook
