@@ -5,6 +5,7 @@ from tqdm.auto import tqdm
 import gurobipy as gp
 from gurobipy import GRB
 import bisect
+import cvxpy as cp
 
 
 @dataclass
@@ -16,6 +17,7 @@ class MRIS(Scheduler):
     # Repeat until completion
 
     sort: str = None
+    solver: str = 'GLPK_MI' # or GUROBI
 
     def __repr__(self):
         return "MRIS-ERF" if not self.sort else f"MRIS-{self.sort}"
@@ -50,7 +52,7 @@ class MRIS(Scheduler):
         num_processed_jobs = 0
 
         k = 0
-        pbar = tqdm(total=len(self.jobs), desc=self.__repr__(), position=self.id)
+        pbar = tqdm(total=len(self.jobs), desc=self.__repr__(), position=self.id, leave=False)
         while num_processed_jobs != len(self.jobs):
             t = np.power(2, k)
 
@@ -69,22 +71,32 @@ class MRIS(Scheduler):
 
             max_volume = max(self.machines[0].D) * R * len(self.machines) * t
 
-            env = gp.Env(empty=True)
-            env.setParam("OutputFlag", 0)
-            env.start()
+            if self.solver == 'GUROBI':
+                env = gp.Env(empty=True)
+                env.setParam("OutputFlag", 0)
+                env.start()
 
-            m = gp.Model(env=env)
-            x = m.addVars(N_k, name="x", vtype=GRB.BINARY)
+                m = gp.Model(env=env)
+                x = m.addVars(N_k, name="x", vtype=GRB.BINARY)
 
-            m.setObjective(gp.quicksum(released_weights[i] * x[i] for i in range(N_k)), GRB.MAXIMIZE)
+                m.setObjective(gp.quicksum(released_weights[i] * x[i] for i in range(N_k)), GRB.MAXIMIZE)
 
-            m.addConstr((gp.quicksum(released_volumes[i] * x[i] for i in range(N_k)) <= max_volume), name="knapsack")
+                m.addConstr((gp.quicksum(released_volumes[i] * x[i] for i in range(N_k)) <= max_volume),
+                            name="knapsack")
 
-            m.setParam(GRB.Param.LogToConsole, 0)
+                m.setParam(GRB.Param.LogToConsole, 0)
 
-            m.optimize()
+                m.optimize()
 
-            jobs_to_schedule_idxs = [potential_jobs_idxs[idx] for idx in range(N_k) if x[idx].x == 1]
+                jobs_to_schedule_idxs = [potential_jobs_idxs[idx] for idx in range(N_k) if x[idx].x == 1]
+            else:
+                x = cp.Variable(N_k, boolean=True)
+                volume_constraint = released_volumes @ x <= max_volume
+                objective = released_weights @ x
+                knapsack_problem = cp.Problem(cp.Maximize(objective), [volume_constraint])
+                knapsack_problem.solve(solver=self.solver)
+                jobs_to_schedule_idxs = [potential_jobs_idxs[idx] for idx in range(N_k) if x.value.astype(int)[idx] == 1]
+
             # jobs_to_schedule = [unscheduled_jobs[idx] for idx in jobs_to_schedule_idxs]
 
             # Schedule the jobs using list scheduling starting at current time
@@ -197,6 +209,169 @@ class MRIS(Scheduler):
 
 
 @dataclass
+class MRISOffline(Scheduler):
+    # General outline
+    # Iterate over geometrically increasing intervals
+    # Find a subset of jobs with maximum weight
+    # Schedule them offline using list scheduling
+    # Repeat until completion
+    # Ignores release dates
+
+    sort: str = None
+
+    def __repr__(self):
+        return "MRISOffline-ERF" if not self.sort else f"MRISOffline-{self.sort}"
+
+    def process(self):
+        try:
+            R = self.jobs[0].d.size
+        except AttributeError:
+            R = 1
+
+        unscheduled_jobs = self.jobs.copy()
+        unscheduled_job_demands = np.fromiter((job.d for job in self.jobs), dtype=np.dtype((type(self.jobs[0].d), R)),
+                                              count=len(self.jobs))
+        unscheduled_job_processing_times = np.fromiter((job.p for job in self.jobs),
+                                                       dtype=np.dtype(type(self.jobs[0].p)), count=len(self.jobs))
+        unscheduled_job_volumes = np.sum(unscheduled_job_demands, axis=1) * unscheduled_job_processing_times
+        unscheduled_job_weights = np.fromiter((job.w for job in self.jobs), dtype=np.dtype(type(self.jobs[0].w)),
+                                              count=len(self.jobs))
+
+        p_min = np.min(unscheduled_job_processing_times)
+
+        # Rescale for our purposes
+        unscheduled_job_processing_times /= p_min
+        unscheduled_job_volumes /= p_min
+
+        for job in unscheduled_jobs:
+            job.p /= p_min
+
+        num_processed_jobs = 0
+
+        # Three columns are id, assigned machine, S_j, C_j, and resource demands
+        X = np.ones(shape=(len(self.jobs), 4 + R)) * -1
+
+        k = 0
+        pbar = tqdm(total=len(self.jobs), desc=self.__repr__(), position=self.id, leave=False)
+        while num_processed_jobs != len(self.jobs):
+            t = np.power(2, k)
+
+            # Find all the jobs released up to time t
+            potential_jobs_idxs = np.where(t >= unscheduled_job_processing_times)[0]
+
+            candidate_volumes = unscheduled_job_volumes[potential_jobs_idxs]
+            candidate_weights = unscheduled_job_weights[potential_jobs_idxs]
+
+            N_k = len(potential_jobs_idxs)
+
+            if N_k == 0:
+                k += 1
+                continue
+
+            max_volume = max(self.machines[0].D) * R * len(self.machines) * t
+
+            env = gp.Env(empty=True)
+            env.setParam("OutputFlag", 0)
+            env.start()
+
+            m = gp.Model(env=env)
+            x = m.addVars(N_k, name="x", vtype=GRB.BINARY)
+
+            m.setObjective(gp.quicksum(candidate_weights[i] * x[i] for i in range(N_k)), GRB.MAXIMIZE)
+
+            m.addConstr((gp.quicksum(candidate_volumes[i] * x[i] for i in range(N_k)) <= max_volume), name="knapsack")
+
+            m.setParam(GRB.Param.LogToConsole, 0)
+
+            m.optimize()
+
+            jobs_to_schedule_idxs = [potential_jobs_idxs[idx] for idx in range(N_k) if x[idx].x == 1]
+            # jobs_to_schedule = [unscheduled_jobs[idx] for idx in jobs_to_schedule_idxs]
+
+            # Schedule the jobs using list scheduling starting at current time
+            unscheduled_job_heuristics = None
+            # Compute the heuristic for each job without sorting by ascending order
+            processing_times_to_schedule = unscheduled_job_processing_times[jobs_to_schedule_idxs]
+            job_demands_to_schedule = unscheduled_job_demands[jobs_to_schedule_idxs]
+            job_weights_to_schedule = unscheduled_job_weights[jobs_to_schedule_idxs]
+
+            match self.sort:
+                case "SJF":
+                    unscheduled_job_heuristics = processing_times_to_schedule
+                case "SVF":
+                    unscheduled_job_heuristics = processing_times_to_schedule * np.sum(job_demands_to_schedule, axis=1)
+                case "SDF":
+                    unscheduled_job_heuristics = np.sum(job_demands_to_schedule, axis=1)
+                case "WSJF":
+                    unscheduled_job_heuristics = processing_times_to_schedule / job_weights_to_schedule
+                case "WSVF":
+                    unscheduled_job_heuristics = processing_times_to_schedule * np.sum(job_demands_to_schedule,axis=1) / job_weights_to_schedule
+                case "WSDF":
+                    unscheduled_job_heuristics = np.sum(job_demands_to_schedule, axis=1) / job_weights_to_schedule
+                case _:
+                    raise Exception("Unknown sort " + self.sort)
+
+            unscheduled_job_heuristics_idx = np.argsort(unscheduled_job_heuristics)
+            jobs_to_schedule = [unscheduled_jobs[jobs_to_schedule_idxs[idx]] for idx in unscheduled_job_heuristics_idx]
+
+            # Schedule jobs via Earliest Feasible Mechanism
+            for job in jobs_to_schedule:
+                start_times = np.zeros(shape=len(self.machines))
+                for i, machine in enumerate(self.machines):
+                    makespan = np.max(X[np.where(X[:, 1] == i)][:, 3], initial=0)
+                    t = 0
+                    S = None
+                    # Scan over the time horizon, while maintaining S that keeps track of earliest feasible start
+                    while t <= makespan + job.p:
+                        # Find all the jobs alive at time t on machine i, i.e. S_j <= t < C_j
+                        alive_jobs = X[np.where((X[:, 1] == i) & (X[:, 2] <= t) & (t < X[:, 3]))]
+                        total_demand = np.sum(alive_jobs[:, 4:], axis=0)
+                        if (np.less_equal(total_demand + job.d, machine.D)).all():
+                            # t is a feasible start. Ensure the job fits for the entirety of its processing time
+                            if S is None:
+                                S = t
+
+                            if S + job.p <= t:
+                                break
+                        else:
+                            # Could not feasibly schedule job over its processing time. Our candidate is not valid
+                            S = None
+
+                        # Advance time horizon by the earliest completion time of occupying jobs
+                        t = min(alive_jobs[:, 3]) if alive_jobs.size > 0 else t + job.p
+
+                    start_times[i] = S
+
+                i = np.argmin(start_times)
+                job.S = start_times[i]
+                job.i = i
+                self.machines[i].add_job(job)
+                X[job.id, 0] = job.id
+                X[job.id, 1] = i
+                X[job.id, 2] = job.S
+                X[job.id, 3] = job.S + job.p
+                X[job.id, 4:] = job.d
+
+                pbar.update(1)
+
+            for idx in sorted(jobs_to_schedule_idxs, reverse=True):
+                unscheduled_jobs.pop(idx)
+
+            if jobs_to_schedule_idxs:
+                unscheduled_job_volumes = np.delete(unscheduled_job_volumes, jobs_to_schedule_idxs)
+                unscheduled_job_weights = np.delete(unscheduled_job_weights, jobs_to_schedule_idxs)
+                unscheduled_job_processing_times = np.delete(unscheduled_job_processing_times, jobs_to_schedule_idxs)
+
+            k += 1
+            num_processed_jobs += len(jobs_to_schedule)
+
+        for job in self.jobs:
+            job.p *= p_min
+            job.S *= p_min
+
+        return self.jobs
+
+@dataclass
 class MRISGreedy(Scheduler):
     # MRIS that uses greedy heuristic to solve knapsack
 
@@ -235,7 +410,7 @@ class MRISGreedy(Scheduler):
         num_processed_jobs = 0
 
         k = 0
-        pbar = tqdm(total=len(self.jobs), desc=self.__repr__(), position=self.id)
+        pbar = tqdm(total=len(self.jobs), desc=self.__repr__(), position=self.id, leave=False)
         while num_processed_jobs != len(self.jobs):
             t = np.power(2, k)
 

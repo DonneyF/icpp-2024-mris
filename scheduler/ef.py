@@ -18,11 +18,11 @@ class EFScheduler(Scheduler):
     pbar: tqdm = None
 
     def __repr__(self):
-        return f"{self.sort}-EF-{self.multid.upper()}" if self.multid else "SVF-EF"
+        return f"{self.sort}-EF-{self.multid.upper()}" if self.multid else f"{self.sort}-EF"
 
     def process(self):
         if self.pbar is None:
-            pbar = tqdm(total=len(self.jobs), desc=self.__repr__(), position=self.id)
+            pbar = tqdm(total=len(self.jobs), desc=self.__repr__(), position=self.id, leave=True)
         else:
             pbar = self.pbar
 

@@ -77,7 +77,7 @@ class BFEXECScheduler(Scheduler):
         phase = 0
         queue = []
         phase1_machine_idx = 0 # Index of the machine whose job recently finished
-        pbar = tqdm.tqdm(total=len(self.jobs), desc=self.__repr__(), position=self.id)
+        pbar = tqdm.tqdm(total=len(self.jobs), desc=self.__repr__(), position=self.id, leave=False)
         while num_processed_jobs != len(self.jobs):
             num_phase_processed = 0
             if phase == 0:

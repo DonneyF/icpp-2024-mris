@@ -10,9 +10,9 @@ import bisect
 import time
 
 @dataclass
-class PriorityQueueScheduler(Scheduler):
+class PriorityQueue(Scheduler):
     sort: str = None
-    online: bool = False  # Wait for all jobs to arrive, then schedule them offline.
+    collect: bool = False  # Wait for all jobs to arrive, then schedule them offline.
     pbar: tqdm = None
 
     def __repr__(self):
@@ -68,7 +68,7 @@ class PriorityQueueScheduler(Scheduler):
         t = np.zeros(len(self.machines))
 
         if self.pbar is None:
-            pbar = tqdm(total=len(self.jobs), desc=self.__repr__(), position=self.id)
+            pbar = tqdm(total=len(self.jobs), desc=self.__repr__(), position=self.id, leave=False)
         else:
             pbar = self.pbar
         while num_processed_jobs != len(self.jobs):
@@ -128,14 +128,14 @@ class PriorityQueueScheduler(Scheduler):
                 else:
                     break
 
-        if self.online:
+        if self.collect:
             self.jobs = self.__offline_to_online__(self.jobs)
 
         return self.jobs
 
 
 @dataclass
-class OnlinePriorityQueueScheduler(Scheduler):
+class OnlinePriorityQueue(Scheduler):
     # Same as offline list scheduling, but job start times must respect release dates
     sort: str = None
 
@@ -184,7 +184,7 @@ class OnlinePriorityQueueScheduler(Scheduler):
         unscheduled_job_heuristics_idx = np.argsort(unscheduled_job_heuristics)
 
         t = np.ones(len(self.machines)) * min(unscheduled_release_dates)
-        pbar = tqdm(total=len(self.jobs), desc=self.__repr__(), position=self.id)
+        pbar = tqdm(total=len(self.jobs), desc=self.__repr__(), position=self.id, leave=False)
         while num_processed_jobs != len(self.jobs):
             i = np.argmin(t)
             machine = self.machines[i]

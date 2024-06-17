@@ -23,13 +23,13 @@ def first_fit(items: List[np.array]) -> List[List[np.array]]:
     return bins
 
 
-def first_fit_job(jobs: List[Job]) -> List[List[Job]]:
+def first_fit_job(jobs: List[Job], capacity: np.array) -> List[List[Job]]:
     bins = [[]]
 
     for job in jobs:
         can_fit = False
         for bin_ in bins:
-            if np.all(np.add.reduce([j.d for j in bin_]) + job.d <= np.ones(np.size(job.d))):
+            if np.all(np.add.reduce([j.d for j in bin_]) + job.d <= capacity):
                 bin_.append(job)
                 can_fit = True
                 break
@@ -37,6 +37,21 @@ def first_fit_job(jobs: List[Job]) -> List[List[Job]]:
         if not can_fit:
             bins.append([job])
 
+    return bins
+
+def next_fit_job(jobs: List[Job], capacity: np.array) -> List[List[Job]]:
+    bins = []
+
+    curr_bin = []
+
+    for job in jobs:
+        if np.all(np.add.reduce([j.d for j in curr_bin]) + job.d <= capacity):
+            curr_bin.append(job)
+        else:
+            bins.append(curr_bin)
+            curr_bin = [job]
+
+    bins.append(curr_bin)
     return bins
 
 

@@ -40,7 +40,7 @@ class TetrisScheduler(Scheduler):
 
         t = np.ones(len(self.machines)) * min(unscheduled_release_dates)
 
-        pbar = tqdm(total=len(self.jobs), desc=self.__repr__(), position=self.id)
+        pbar = tqdm(total=len(self.jobs), desc=self.__repr__(), position=self.id, leave=False)
         while num_processed_jobs != len(self.jobs):
             i = np.argmin(t)
             machine = self.machines[i]

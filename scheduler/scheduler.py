@@ -25,33 +25,37 @@ class Scheduler:
         # Three columns are id, assigned machine, S_j, C_j, and resource demands
         X = np.ones(shape=(len(jobs), 4 + R)) * -1
 
+        def earliest_feasible_start_date(job, machine):
+            i = machine.id
+            makespan = np.max(X[np.where(X[:, 1] == i)][:, 3], initial=0)
+            t = 0
+            S = None
+            # Scan over the time horizon, while maintaining S that keeps track of earliest feasible start
+            while t <= makespan + job.p:
+                # Find all the jobs alive at time t on machine i, i.e. S_j <= t < C_j
+                alive_jobs = X[np.where((X[:, 1] == i) & (X[:, 2] <= t) & (t < X[:, 3]))]
+                total_demand = np.sum(alive_jobs[:, 4:], axis=0)
+                if (np.less_equal(total_demand + job.d, machine.D)).all():
+                    # t is a feasible start. Ensure the job fits for the entirety of its processing time
+                    if S is None:
+                        S = t
+
+                    if S + job.p <= t:
+                        break
+                else:
+                    # Could not feasibly schedule job over its processing time. Our candidate is not valid
+                    S = None
+
+                # Advance time horizon by the earliest completion time of occupying jobs
+                t = min(alive_jobs[:, 3]) if alive_jobs.size > 0 else t + job.p
+
+            return S
+
         # Schedule jobs via Earliest Feasible Mechanism
         for j, job in enumerate(jobs):
             start_times = np.zeros(shape=len(self.machines))
             for i, machine in enumerate(self.machines):
-                makespan = np.max(X[np.where(X[:, 1] == i)][:, 3], initial=0)
-                t = 0
-                S = None
-                # Scan over the time horizon, while maintaining S that keeps track of earliest feasible start
-                while t <= makespan + job.p:
-                    # Find all the jobs alive at time t on machine i, i.e. S_j <= t < C_j
-                    alive_jobs = X[np.where((X[:, 1] == i) & (X[:, 2] <= t) & (t < X[:, 3]))]
-                    total_demand = np.sum(alive_jobs[:, 4:], axis=0)
-                    if (np.less_equal(total_demand + job.d, machine.D)).all():
-                        # t is a feasible start. Ensure the job fits for the entirety of its processing time
-                        if S is None:
-                            S = t
-
-                        if S + job.p <= t:
-                            break
-                    else:
-                        # Could not feasibly schedule job over its processing time. Our candidate is not valid
-                        S = None
-
-                    # Advance time horizon by the earliest completion time of occupying jobs
-                    t = min(alive_jobs[:, 3]) if alive_jobs.size > 0 else t + job.p
-
-                start_times[i] = S
+                start_times[i] = earliest_feasible_start_date(job, machine)
 
             i = np.argmin(start_times)
             job.S = start_times[i]
@@ -98,10 +102,10 @@ class Scheduler:
         for i in range(M_):
             machine = self.machines[i]
             # Plot using integer time points for simplicity
-            start_times = np.floor(np.array([job.S for job in machine.jobs]))
-            completion_times = np.floor(np.array([job.S + job.p for job in machine.jobs]))
+            start_times = np.array([job.S for job in machine.jobs])
+            completion_times = np.array([job.S + job.p for job in machine.jobs])
 
-            x = np.concatenate([np.zeros(1), start_times, completion_times, start_times-1E-3, completion_times-1E-3])
+            x = np.concatenate([np.zeros(1), start_times, completion_times, start_times+1E-12, completion_times-1E-12])
             x = np.unique(x)
 
             x = np.sort(x)
@@ -115,7 +119,7 @@ class Scheduler:
 
                     for job in machine.jobs:
                         # Update cumulative resource usage
-                        cumulative_resource += np.where((int(job.S) <= x) & (int(job.S + job.p) > x), job.d[l], 0)
+                        cumulative_resource += np.where((job.S < x) & (job.S + job.p > x), job.d[l], 0)
                         stacked_data.append(np.copy(cumulative_resource))
 
                     stacked_data.reverse()
@@ -125,7 +129,7 @@ class Scheduler:
                 else:
                     for job in machine.jobs:
                         # Update cumulative resource usage
-                        cumulative_resource += np.where((int(job.S) <= x) & (int(job.S + job.p) > x), job.d[l], 0)
+                        cumulative_resource += np.where((job.S < x) & (job.S + job.p > x), job.d[l], 0)
 
                     ax.stackplot(x, cumulative_resource)
 
