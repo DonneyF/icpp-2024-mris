@@ -68,6 +68,10 @@ scheduler_benchmark_resources() {
   done
 }
 
+adversarial() {
+    python3 experiments/6_adversarial.py -n 2500 -m 1 --run 1 -r 3
+}
+
 EXPERIMENT="$1"
 NUM_RUNS="${2:-1}"
 DATA_LOCATION='./experiments/data'
@@ -98,7 +102,11 @@ case "$EXPERIMENT" in
     echo "Executing scheduler_benchmark_resources"
     scheduler_benchmark_resources
     ;;
+  6)
+    echo "Executing adversarial"
+    adversarial
+    ;;
   *)
-    echo "Experiment number needs to range from 1 to 5"
+    echo "Experiment number needs to range from 1 to 6"
     ;;
 esac
