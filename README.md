@@ -167,3 +167,13 @@ We use the same Jupyter notebooks as above. The dependencies for plotting only a
 ```bash
 python3 -m pip install numpy<2 matplotlib pandas pyarrow scienceplots lz4 notebook
 ```
+
+## Variations in Results
+
+There some possibilities that there could be run to run variations.
+
+For instance, given that sorting is used, there is a possibility that two jobs yield the same heuristic (i.e. same processing time for SJF), and thus their order in scheduling can be different. However we have not observed this in our experiments.
+
+The `DOWNSAMPLE_OFFSET` factor is randomized across runs so that each run selects a different subset of jobs to schedule. However, as the downsampling occurs by evenly selecting every fixed number of jobs so as to evenly represent jobs released in the 12.5-day time window, we generally expect results to not vary wildly between one run to the next. However when the number of jobs being scheduled is small, this effect may be more pronounced.
+
+The machine resources capacities are represented by floating point values and some jobs may be permitted to be scheduled when simulated on platform/library and not the other.

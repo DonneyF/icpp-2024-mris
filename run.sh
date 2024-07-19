@@ -5,11 +5,12 @@ MRIS_heuristics() {
   DOWNSAMPLE_FACTORS=(1024 512 256 128 64)
   for DOWNSAMPLE_FACTOR in "${DOWNSAMPLE_FACTORS[@]}"
   do
+  OFFSETS=($(python3 -S -c "import random; print(' '.join(map(str, random.sample(range(0, $DOWNSAMPLE_FACTOR), $NUM_RUNS))))"))
      for ((i=1; i<=NUM_RUNS; i++))
      do
-       DOWNSAMPLE_OFFSET=$(python3 -S -c "import random; print(random.randrange(0, $DOWNSAMPLE_FACTOR))")
+       DOWNSAMPLE_OFFSET=${OFFSETS[$((i-1))]}
        echo "Run $i of $NUM_RUNS for downsample factor $DOWNSAMPLE_FACTOR. Using offset $DOWNSAMPLE_OFFSET."
-       python3 experiments/1_MRIS_heuristics.py --downsample_factor $DOWNSAMPLE_FACTOR --downsample_offset $DOWNSAMPLE_OFFSET --run $i
+       # python3 experiments/1_MRIS_heuristics.py --downsample_factor $DOWNSAMPLE_FACTOR --downsample_offset $DOWNSAMPLE_OFFSET --run $i
      done
   done
 }
@@ -18,9 +19,10 @@ MRIS_knapsack() {
   DOWNSAMPLE_FACTORS=(1024 512 256 128 64)
   for DOWNSAMPLE_FACTOR in "${DOWNSAMPLE_FACTORS[@]}"
   do
+    OFFSETS=($(python3 -S -c "import random; print(' '.join(map(str, random.sample(range(0, $DOWNSAMPLE_FACTOR), $NUM_RUNS))))"))
      for ((i=1; i<=NUM_RUNS; i++))
      do
-       DOWNSAMPLE_OFFSET=$(python3 -S -c "import random; print(random.randrange(0, $DOWNSAMPLE_FACTOR))")
+       DOWNSAMPLE_OFFSET=${OFFSETS[$((i-1))]}
        echo "Run $i of $NUM_RUNS for downsample factor $DOWNSAMPLE_FACTOR. Using offset $DOWNSAMPLE_OFFSET."
        python3 experiments/2_MRIS_knapsack.py --downsample_factor $DOWNSAMPLE_FACTOR --downsample_offset $DOWNSAMPLE_OFFSET --run $i
      done
@@ -28,12 +30,13 @@ MRIS_knapsack() {
 }
 
 scheduler_benchmark_jobs() {
-  DOWNSAMPLE_FACTORS=(512 256 128 64 32)
+  DOWNSAMPLE_FACTORS=(512 256 128 64 32 16)
   for DOWNSAMPLE_FACTOR in "${DOWNSAMPLE_FACTORS[@]}"
   do
+    OFFSETS=($(python3 -S -c "import random; print(' '.join(map(str, random.sample(range(0, $DOWNSAMPLE_FACTOR), $NUM_RUNS))))"))
      for ((i=1; i<=NUM_RUNS; i++))
      do
-       DOWNSAMPLE_OFFSET=$(python3 -S -c "import random; print(random.randrange(0, $DOWNSAMPLE_FACTOR))")
+       DOWNSAMPLE_OFFSET=${OFFSETS[$((i-1))]}
        echo "Run $i of $NUM_RUNS for downsample factor $DOWNSAMPLE_FACTOR. Using offset $DOWNSAMPLE_OFFSET."
        python3 experiments/3_scheduler_benchmark_jobs.py --downsample_factor $DOWNSAMPLE_FACTOR --downsample_offset $DOWNSAMPLE_OFFSET --run $i
      done
@@ -45,9 +48,10 @@ scheduler_benchmark_machines() {
   DOWNSAMPLE_FACTOR=64
   for MACHINE in "${MACHINES[@]}"
   do
+    OFFSETS=($(python3 -S -c "import random; print(' '.join(map(str, random.sample(range(0, $DOWNSAMPLE_FACTOR), $NUM_RUNS))))"))
      for ((i=1; i<=NUM_RUNS; i++))
      do
-       DOWNSAMPLE_OFFSET=$(python3 -S -c "import random; print(random.randrange(0, $DOWNSAMPLE_FACTOR))")
+       DOWNSAMPLE_OFFSET=${OFFSETS[$((i-1))]}
        echo "Run $i of $NUM_RUNS for $MACHINE machines. Using offset $DOWNSAMPLE_OFFSET."
        python3 experiments/4_scheduler_benchmark_machines.py --downsample_factor $DOWNSAMPLE_FACTOR --downsample_offset $DOWNSAMPLE_OFFSET --run $i -m $MACHINE
      done
@@ -59,9 +63,10 @@ scheduler_benchmark_resources() {
   DOWNSAMPLE_FACTOR=128
   for RESOURCE in "${RESOURCES[@]}"
   do
+    OFFSETS=($(python3 -S -c "import random; print(' '.join(map(str, random.sample(range(0, $DOWNSAMPLE_FACTOR), $NUM_RUNS))))"))
      for ((i=1; i<=NUM_RUNS; i++))
      do
-       DOWNSAMPLE_OFFSET=$(python3 -S -c "import random; print(random.randrange(0, $DOWNSAMPLE_FACTOR))")
+       DOWNSAMPLE_OFFSET=${OFFSETS[$((i-1))]}
        echo "Run $i of $NUM_RUNS for $RESOURCE resources. Using offset $DOWNSAMPLE_OFFSET."
        python3 experiments/5_scheduler_benchmark_resources.py --downsample_factor $DOWNSAMPLE_FACTOR --downsample_offset $DOWNSAMPLE_OFFSET --run $i -r $RESOURCE
      done
