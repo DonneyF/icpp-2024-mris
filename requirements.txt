@@ -9,3 +9,4 @@ scienceplots
 lz4
 notebook
 cvxpy[GLPK]
+scipy

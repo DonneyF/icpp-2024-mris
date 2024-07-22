@@ -14,4 +14,6 @@ COPY . /app
 
 RUN chmod +x *.sh
 
+ENV PYTHONPATH "${PYTHONPATH}:/app"
+
 CMD ["/bin/bash", "/app/run.sh"]

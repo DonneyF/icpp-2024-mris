@@ -43,7 +43,8 @@ To replicate the results in the paper, we provide a `run.sh` that contains all t
 ./run.sh [EXPERIMENT_NUMBER] [NUMBER_OF_RUNS]
 ```
 
-`EXPERIMENT_NUMBER` ranges from 1 to 6 and is described below. By default `NUMBER_OF_RUNS=1`.
+- `EXPERIMENT_NUMBER`: An integer [1-6] that maps to one of the experiments.
+- `NUMBER_OF_RUNS`: Number of times to run each experiment, with a randomized `DOWNSAMPLE_OFFSET` for each run. Default `1`.
 
 There are six experiments. We also specify the number of schedulers these experiments process in parallel.
 
@@ -65,7 +66,7 @@ Unless explicitly specified, `MACHINES=20` and `RESOURCES=4` are specified withi
 This explores different sorting heuristics for the `MRIS` scheduler (7 schedulers)
 
 ```bash
-export PYTHONPATH="${PYTHONPATH}:${PWD%/*}/scheduler"
+export PYTHONPATH="${PYTHONPATH}:${PWD%/*}"
 python3 experiments/1_MRIS_heuristics.py --downsample_factor [DOWNSAMPLE_FACTOR] --downsample_offset [DOWNSAMPLE_OFFSET] --run [RUN_NUMBER]
 ```
 
@@ -74,7 +75,7 @@ python3 experiments/1_MRIS_heuristics.py --downsample_factor [DOWNSAMPLE_FACTOR]
 This explores options for the knapsack solution of the `MRIS` scheduler (2 schedulers)
 
 ```bash
-export PYTHONPATH="${PYTHONPATH}:${PWD%/*}/scheduler"
+export PYTHONPATH="${PYTHONPATH}:${PWD}"
 python3 experiments/2_MRIS_knapsack.py --downsample_factor [DOWNSAMPLE_FACTOR] --downsample_offset [DOWNSAMPLE_OFFSET] --run [RUN_NUMBER]
 ```
 
@@ -83,7 +84,7 @@ python3 experiments/2_MRIS_knapsack.py --downsample_factor [DOWNSAMPLE_FACTOR] -
 We compare `MRIS` and a few other schedulers with a chosen sorting heuristic, sweeping the number of jobs (5 schedulers)
 
 ```bash
-export PYTHONPATH="${PYTHONPATH}:${PWD%/*}/scheduler"
+export PYTHONPATH="${PYTHONPATH}:${PWD}"
 python3 experiments/3_scheduler_benchmark_jobs.py --downsample_factor [DOWNSAMPLE_FACTOR] --downsample_offset [DOWNSAMPLE_OFFSET] --run [RUN_NUMBER]
 ```
 
@@ -92,7 +93,7 @@ python3 experiments/3_scheduler_benchmark_jobs.py --downsample_factor [DOWNSAMPL
 We compare `MRIS` and a few other schedulers with a chosen sorting heuristic, sweeping the number of machines (5 schedulers)
 
 ```bash
-export PYTHONPATH="${PYTHONPATH}:${PWD%/*}/scheduler"
+export PYTHONPATH="${PYTHONPATH}:${PWD}"
 python3 experiments/4_scheduler_benchmark_machines.py --downsample_factor [DOWNSAMPLE_FACTOR] --downsample_offset [DOWNSAMPLE_OFFSET] --run [RUN_NUMBER] -m [MACHINES]
 ```
 
@@ -101,6 +102,7 @@ python3 experiments/4_scheduler_benchmark_machines.py --downsample_factor [DOWNS
 We compare `MRIS` and a few other schedulers with a chosen sorting heuristic, sweeping the number of resources (5 schedulers)
 
 ```bash
+export PYTHONPATH="${PYTHONPATH}:${PWD}"
 python3 experiments/5_scheduler_benchmark_resources.py --downsample_factor [DOWNSAMPLE_FACTOR] --downsample_offset [DOWNSAMPLE_OFFSET] --run [RUN_NUMBER] -r [RESOURCES]
 ```
 
@@ -109,25 +111,19 @@ python3 experiments/5_scheduler_benchmark_resources.py --downsample_factor [DOWN
 We provide a specific adversarial input to help illustrate an example where `MRIS` is dominant.
 
 ```bash
+export PYTHONPATH="${PYTHONPATH}:${PWD}"
 python3 experiments/6_scheduler_benchmark_resources.py -n [JOBS] -m [MACHINES] --run [RUN_NUMBER] -r [RESOURCES]
 ```
 
-## Plotting Results
+## Using Docker
 
-Associated with each experiment file is a Jupyter Notebook that interprets the output of the experiment dataframes.
-
-
-## Docker
-
-### Obtaining the image
-
-One can build using the provided `Dockerfile`
+We provide a Dockerfile that includes all the dependencies needed to run the experiments.
 
 ```bash
 docker build -t machine-scheduler .
 ```
 
-or pull an image built using GitHub Actions (`linux/amd64` and `linux/arm64` images are provided):
+One can also pull an image built using GitHub Actions (`linux/amd64` and `linux/arm64` images are provided):
 
 ```bash
 docker pull gchr.io/donneyf/icpp-2024-mris:main
@@ -148,10 +144,7 @@ docker run \
 
 #### Step 2. Running experiments
 
-We pass in two positional arguments to `run.sh` to execute experiments after obtaining data.
-
-- `EXPERIMENT_NUMBER`: An integer [1-5] that maps to one of the experiments, as mentioned above
-- `NUMBER_OF_RUNS`: Number of times to run each experiment, with a randomized `DOWNSAMPLE_OFFSET` for each run. Default `1`.
+We can use the `run.sh` script as described above within docker:
 
 ```bash
 docker run \
@@ -160,19 +153,47 @@ docker run \
   ghcr.io/donneyf/icpp-2024-mris:main ./run.sh [EXPERIMENT_NUMBER] [NUMBER_OF_RUNS]
 ```
 
-### Viewing Results
+Similarly, we can also use the Python scripts to run individual experiments. For example, experiment 1:
 
-We use the same Jupyter notebooks as above. The dependencies for plotting only are given below:
+```bash
+docker run \
+  -v ./data:/app/experiments/data \
+  -v ./results:/app/experiments/results \
+  ghcr.io/donneyf/icpp-2024-mris:main ./run.sh [EXPERIMENT_NUMBER] [NUMBER_OF_RUNS]
+```
+
+
+## Plotting Results
+
+Associated with each experiment file is a Jupyter Notebook that interprets the output of the experiment dataframes. Within each notebook are a couple of parameters that need to be set before plotting.
+
+We also provide for convenience a script that builds all plots if the results are all available. Run `generate_all_plots.py -h` to see usage.
+
+### Local
+
+The Python dependencies needed for plotting only are provided below:
 
 ```bash
 python3 -m pip install numpy<2 matplotlib pandas pyarrow scienceplots lz4 notebook
 ```
 
+> [!WARNING]  
+> To use the `scienceplots` package to replicate the figures, a LaTeX install is required. Otherwise, remove the block on stylizing the plots.
+
+### Renku
+
+[Renku](https://renkulab.io/) is a platform and tools designed for reproducible and collaborative data analysis. At its core is a modified Docker container that can be used with their online JupyterLab interface.
+
+We have provided a Renku project here: https://renkulab.io/projects/donney.fan/icpp-2024-mris-plots
+
+To upload data to the Session (JupterLab instance), you can use webui to upload files, the terminal to download from remote storage with `wget` or `rclone`, or [mount cloud storage to the instance](https://renku.readthedocs.io/en/stable/how-to-guides/renkulab/external-storage.html). The container provides 20GB of scratch space, which should be enough for a large ZIP file that contains all the results and its decompressed space.
+
+ 
 ## Variations in Results
 
 There some possibilities that there could be run to run variations.
 
-For instance, given that sorting is used, there is a possibility that two jobs yield the same heuristic (i.e. same processing time for SJF), and thus their order in scheduling can be different. However we have not observed this in our experiments.
+For instance, given that sorting is used, there is a possibility that two jobs yield the same heuristic (i.e. same processing time for SJF), and thus their order in scheduling can be different. However we have not observed this in our experiments. This also applies to selecting jobs via knapsack, there may be multiple solutions.
 
 The `DOWNSAMPLE_OFFSET` factor is randomized across runs so that each run selects a different subset of jobs to schedule. However, as the downsampling occurs by evenly selecting every fixed number of jobs so as to evenly represent jobs released in the 12.5-day time window, we generally expect results to not vary wildly between one run to the next. However when the number of jobs being scheduled is small, this effect may be more pronounced.
 
