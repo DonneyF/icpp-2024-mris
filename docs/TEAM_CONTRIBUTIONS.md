@@ -9,6 +9,10 @@ These are provisional role numbers, not invented identities or account assignmen
 | 3 | Figure 4: number of machines | #7, shares #9 | Member 4's Figure 6 | Same evidence for the machine-count sweep |
 | 4 | Figure 6: number of resource types | #8, shares #9 | Member 2's Figure 3 | Same evidence; factor-64 primary and factor-128 variant kept separate |
 
+## Larger runs: per-member plan
+
+The step-by-step commands for each member's larger, load-matched runs are in [MEMBER_RUN_PLAN.md](MEMBER_RUN_PLAN.md). It is written so each member can follow it directly. Only Member 1's 64,000-job point needs an overnight run; the other runs are split into chunks of about 1 h.
+
 ## Independent work: verified starting points (2026-10-29)
 
 Each figure has its own runner step, output folder and Parquet name pattern, so the work can proceed in parallel without shared state. Every `run_reduced_figures.sh` step and the pilot command below was executed on the 8 GB M2 (see AZURE_VALIDATION.md); suggested next steps are not yet run. Each member should first bring their branch up to date with `main` after this PR merges (`git switch <branch> && git merge --ff-only origin/main`) and use a new output root each time.

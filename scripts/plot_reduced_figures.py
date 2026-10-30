@@ -63,6 +63,7 @@ def main():
         values = sorted({e[key] for e in results})
         runs = max(e['run'] for e in results)
         jobs = sorted({e['jobs'] for e in results})
+        machines = sorted({e['M'] for e in results})
         for e in results:
             for name, s in e['schedulers'].items():
                 rows.append(dict(figure=figure, jobs=e['jobs'], M=e['M'], R=e['R'], run=e['run'],
@@ -75,6 +76,7 @@ def main():
         os.chdir(out)
         plt.savefig = stamped_savefig(
             f'REDUCED-SCALE {figure} validation: {jobs[0] if len(jobs) == 1 else "/".join(map(str, jobs))} jobs, '
+            f'M={machines[0] if len(machines) == 1 else "/".join(map(str, machines))}, '
             f'{runs} offsets per point (paper: {paper}, 10 offsets) - not a paper reproduction')
         try:
             if key == 'factor':

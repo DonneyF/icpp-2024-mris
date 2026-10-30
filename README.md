@@ -9,7 +9,7 @@ Four-student reproduction of Donney Fan and Ben Liang, *Online Non-preemptive Mu
 1. Follow [Mac setup](docs/MAC_SETUP.md) using Python 3.12 and the tested lockfile.
 2. Run the small serial validation below; no dataset or Docker is required.
 3. Read [test results](docs/TEST_RESULTS.md), [experiment instructions](docs/EXPERIMENTS.md), [figure plan](docs/FIGURE_REPRODUCTION.md), [Azure validation](docs/AZURE_VALIDATION.md) and the [Figure 6 job-count finding](docs/FIGURE6_JOB_COUNT.md).
-4. Follow the [GitHub workflow](docs/GITHUB_WORKFLOW.md) and [four-member responsibilities](docs/TEAM_CONTRIBUTIONS.md).
+4. Follow the [GitHub workflow](docs/GITHUB_WORKFLOW.md), [four-member responsibilities](docs/TEAM_CONTRIBUTIONS.md) and the per-member [run plan](docs/MEMBER_RUN_PLAN.md).
 
 ```sh
 source .venv/bin/activate
