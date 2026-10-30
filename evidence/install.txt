@@ -1,0 +1,134 @@
+Collecting numpy<2
+  Downloading numpy-1.26.4-cp312-cp312-macosx_11_0_arm64.whl.metadata (61 kB)
+Collecting matplotlib
+  Downloading matplotlib-3.11.2-cp312-cp312-macosx_11_0_arm64.whl.metadata (80 kB)
+Collecting gurobipy
+  Downloading gurobipy-13.0.3-cp312-cp312-macosx_10_13_universal2.whl.metadata (16 kB)
+Collecting pandas
+  Downloading pandas-3.1.0-cp312-cp312-macosx_11_0_arm64.whl.metadata (18 kB)
+Collecting tqdm
+  Using cached tqdm-4.70.1-py3-none-any.whl.metadata (57 kB)
+Collecting intervaltree
+  Downloading intervaltree-3.2.1-py2.py3-none-any.whl.metadata (12 kB)
+Collecting pyarrow
+  Downloading pyarrow-26.0.0-cp312-cp312-macosx_12_0_arm64.whl.metadata (3.0 kB)
+Collecting scienceplots
+  Downloading scienceplots-2.2.2-py3-none-any.whl.metadata (14 kB)
+Collecting lz4
+  Downloading lz4-4.4.5-cp312-cp312-macosx_11_0_arm64.whl.metadata (3.8 kB)
+Collecting scipy
+  Downloading scipy-1.18.1-cp312-cp312-macosx_14_0_arm64.whl.metadata (62 kB)
+Collecting cvxpy[GLPK]
+  Downloading cvxpy-1.9.3-cp312-cp312-macosx_10_13_universal2.whl.metadata (9.7 kB)
+Collecting contourpy>=1.0.1 (from matplotlib)
+  Downloading contourpy-1.4.0-cp312-cp312-macosx_11_0_arm64.whl.metadata (3.8 kB)
+Collecting cycler>=0.10 (from matplotlib)
+  Using cached cycler-0.12.1-py3-none-any.whl.metadata (3.8 kB)
+Collecting fonttools>=4.28.2 (from matplotlib)
+  Downloading fonttools-4.68.0-cp312-cp312-macosx_10_13_universal2.whl.metadata (139 kB)
+Collecting kiwisolver>=1.3.1 (from matplotlib)
+  Downloading kiwisolver-1.5.1-cp312-cp312-macosx_11_0_arm64.whl.metadata (5.2 kB)
+Collecting packaging>=20.0 (from matplotlib)
+  Using cached packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+Collecting pillow>=9 (from matplotlib)
+  Downloading pillow-13.0.0-cp312-cp312-macosx_11_0_arm64.whl.metadata (9.1 kB)
+Collecting pyparsing>=3 (from matplotlib)
+  Using cached pyparsing-3.3.3-py3-none-any.whl.metadata (5.9 kB)
+Collecting python-dateutil>=2.7 (from matplotlib)
+  Using cached python_dateutil-3.0.0-py2.py3-none-any.whl.metadata (8.2 kB)
+INFO: pip is looking at multiple versions of pandas to determine which version is compatible with other requirements. This could take a while.
+Collecting pandas
+  Downloading pandas-3.0.6-cp312-cp312-macosx_11_0_arm64.whl.metadata (79 kB)
+Collecting sortedcontainers (from intervaltree)
+  Downloading sortedcontainers-2.4.0-py2.py3-none-any.whl.metadata (10 kB)
+Collecting osqp>=1.0.0 (from cvxpy[GLPK])
+  Downloading osqp-1.1.3-cp312-cp312-macosx_11_0_arm64.whl.metadata (2.2 kB)
+Collecting clarabel>=0.5.0 (from cvxpy[GLPK])
+  Downloading clarabel-0.11.1-cp39-abi3-macosx_11_0_arm64.whl.metadata (4.8 kB)
+Collecting scs>=3.2.4.post1 (from cvxpy[GLPK])
+  Downloading scs-3.3.1-cp312-cp312-macosx_11_0_arm64.whl.metadata (9.1 kB)
+INFO: pip is looking at multiple versions of cvxpy[glpk] to determine which version is compatible with other requirements. This could take a while.
+Collecting cvxpy[GLPK]
+  Downloading cvxpy-1.9.2-cp312-cp312-macosx_10_13_universal2.whl.metadata (9.7 kB)
+  Downloading cvxpy-1.9.1-cp312-cp312-macosx_10_13_universal2.whl.metadata (9.7 kB)
+  Downloading cvxpy-1.9.0-cp312-cp312-macosx_10_13_universal2.whl.metadata (9.5 kB)
+  Downloading cvxpy-1.8.2-cp312-cp312-macosx_10_13_universal2.whl.metadata (9.6 kB)
+  Downloading cvxpy-1.8.1-cp312-cp312-macosx_10_13_universal2.whl.metadata (9.6 kB)
+  Downloading cvxpy-1.8.0-cp312-cp312-macosx_10_13_universal2.whl.metadata (9.6 kB)
+  Downloading cvxpy-1.7.5-cp312-cp312-macosx_10_13_universal2.whl.metadata (9.5 kB)
+Collecting cvxopt (from cvxpy[GLPK])
+  Downloading cvxopt-1.3.3-cp312-cp312-macosx_15_0_arm64.whl.metadata (43 kB)
+INFO: pip is looking at multiple versions of scipy to determine which version is compatible with other requirements. This could take a while.
+Collecting scipy
+  Downloading scipy-1.18.0-cp312-cp312-macosx_14_0_arm64.whl.metadata (62 kB)
+  Downloading scipy-1.17.1-cp312-cp312-macosx_14_0_arm64.whl.metadata (62 kB)
+Collecting cffi (from clarabel>=0.5.0->cvxpy[GLPK])
+  Downloading cffi-2.1.1-cp312-cp312-macosx_11_0_arm64.whl.metadata (2.5 kB)
+INFO: pip is looking at multiple versions of contourpy to determine which version is compatible with other requirements. This could take a while.
+Collecting contourpy>=1.0.1 (from matplotlib)
+  Downloading contourpy-1.3.3-cp312-cp312-macosx_11_0_arm64.whl.metadata (5.5 kB)
+Collecting jinja2 (from osqp>=1.0.0->cvxpy[GLPK])
+  Using cached jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+Collecting setuptools (from osqp>=1.0.0->cvxpy[GLPK])
+  Using cached setuptools-84.2.1-py3-none-any.whl.metadata (6.6 kB)
+Collecting joblib (from osqp>=1.0.0->cvxpy[GLPK])
+  Using cached joblib-1.6.0-py3-none-any.whl.metadata (6.5 kB)
+Collecting six>=1.6 (from python-dateutil>=2.7->matplotlib)
+  Using cached six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+Collecting tzdata (from python-dateutil>=2.7->matplotlib)
+  Using cached tzdata-2026.6-py2.py3-none-any.whl.metadata (1.4 kB)
+Collecting pycparser (from cffi->clarabel>=0.5.0->cvxpy[GLPK])
+  Using cached pycparser-3.12-py3-none-any.whl.metadata (9.7 kB)
+Collecting MarkupSafe>=2.0 (from jinja2->osqp>=1.0.0->cvxpy[GLPK])
+  Downloading markupsafe-3.0.4-cp312-cp312-macosx_11_0_arm64.whl.metadata (2.7 kB)
+Collecting cloudpickle>=3.0 (from joblib->osqp>=1.0.0->cvxpy[GLPK])
+  Using cached cloudpickle-3.1.2-py3-none-any.whl.metadata (7.1 kB)
+Downloading numpy-1.26.4-cp312-cp312-macosx_11_0_arm64.whl (13.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.7/13.7 MB 2.5 MB/s eta 0:00:00
+Downloading matplotlib-3.11.2-cp312-cp312-macosx_11_0_arm64.whl (9.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.3/9.3 MB 4.5 MB/s eta 0:00:00
+Downloading gurobipy-13.0.3-cp312-cp312-macosx_10_13_universal2.whl (16.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.0/16.0 MB 6.2 MB/s eta 0:00:00
+Downloading pandas-3.0.6-cp312-cp312-macosx_11_0_arm64.whl (10.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.1/10.1 MB 9.6 MB/s eta 0:00:00
+Using cached tqdm-4.70.1-py3-none-any.whl (80 kB)
+Downloading intervaltree-3.2.1-py2.py3-none-any.whl (25 kB)
+Downloading pyarrow-26.0.0-cp312-cp312-macosx_12_0_arm64.whl (36.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 36.3/36.3 MB 15.1 MB/s eta 0:00:00
+Downloading scienceplots-2.2.2-py3-none-any.whl (33 kB)
+Downloading lz4-4.4.5-cp312-cp312-macosx_11_0_arm64.whl (207 kB)
+Downloading scipy-1.17.1-cp312-cp312-macosx_14_0_arm64.whl (20.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 20.3/20.3 MB 21.8 MB/s eta 0:00:00
+Downloading clarabel-0.11.1-cp39-abi3-macosx_11_0_arm64.whl (935 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 935.1/935.1 kB 21.3 MB/s eta 0:00:00
+Downloading contourpy-1.3.3-cp312-cp312-macosx_11_0_arm64.whl (273 kB)
+Using cached cycler-0.12.1-py3-none-any.whl (8.3 kB)
+Downloading fonttools-4.68.0-cp312-cp312-macosx_10_13_universal2.whl (3.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.1/3.1 MB 22.5 MB/s eta 0:00:00
+Downloading kiwisolver-1.5.1-cp312-cp312-macosx_11_0_arm64.whl (64 kB)
+Downloading osqp-1.1.3-cp312-cp312-macosx_11_0_arm64.whl (308 kB)
+Using cached packaging-26.3-py3-none-any.whl (129 kB)
+Downloading pillow-13.0.0-cp312-cp312-macosx_11_0_arm64.whl (4.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.9/4.9 MB 10.8 MB/s eta 0:00:00
+Using cached pyparsing-3.3.3-py3-none-any.whl (126 kB)
+Using cached python_dateutil-3.0.0-py2.py3-none-any.whl (94 kB)
+Downloading scs-3.3.1-cp312-cp312-macosx_11_0_arm64.whl (235 kB)
+Downloading cvxopt-1.3.3-cp312-cp312-macosx_15_0_arm64.whl (4.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.7/4.7 MB 5.5 MB/s eta 0:00:00
+Downloading cvxpy-1.7.5-cp312-cp312-macosx_10_13_universal2.whl (1.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.6/1.6 MB 13.2 MB/s eta 0:00:00
+Downloading sortedcontainers-2.4.0-py2.py3-none-any.whl (29 kB)
+Using cached six-1.17.0-py2.py3-none-any.whl (11 kB)
+Downloading cffi-2.1.1-cp312-cp312-macosx_11_0_arm64.whl (184 kB)
+Using cached jinja2-3.1.6-py3-none-any.whl (134 kB)
+Using cached joblib-1.6.0-py3-none-any.whl (306 kB)
+Using cached setuptools-84.2.1-py3-none-any.whl (876 kB)
+Using cached tzdata-2026.6-py2.py3-none-any.whl (348 kB)
+Using cached cloudpickle-3.1.2-py3-none-any.whl (22 kB)
+Downloading markupsafe-3.0.4-cp312-cp312-macosx_11_0_arm64.whl (12 kB)
+Using cached pycparser-3.12-py3-none-any.whl (62 kB)
+Installing collected packages: sortedcontainers, tzdata, tqdm, six, setuptools, pyparsing, pycparser, pyarrow, pillow, packaging, numpy, MarkupSafe, lz4, kiwisolver, intervaltree, gurobipy, fonttools, cycler, cvxopt, cloudpickle, scipy, python-dateutil, joblib, jinja2, contourpy, cffi, scs, pandas, osqp, matplotlib, clarabel, scienceplots, cvxpy
+Successfully installed MarkupSafe-3.0.4 cffi-2.1.1 clarabel-0.11.1 cloudpickle-3.1.2 contourpy-1.3.3 cvxopt-1.3.3 cvxpy-1.7.5 cycler-0.12.1 fonttools-4.68.0 gurobipy-13.0.3 intervaltree-3.2.1 jinja2-3.1.6 joblib-1.6.0 kiwisolver-1.5.1 lz4-4.4.5 matplotlib-3.11.2 numpy-1.26.4 osqp-1.1.3 packaging-26.3 pandas-3.0.6 pillow-13.0.0 pyarrow-26.0.0 pycparser-3.12 pyparsing-3.3.3 python-dateutil-3.0.0 scienceplots-2.2.2 scipy-1.17.1 scs-3.3.1 setuptools-84.2.1 six-1.17.0 sortedcontainers-2.4.0 tqdm-4.70.1 tzdata-2026.6
+
+[notice] A new release of pip is available: 25.0.1 -> 26.2.2
+[notice] To update, run: <repository>/.venv/bin/python -m pip install --upgrade pip

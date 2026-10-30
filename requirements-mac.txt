@@ -1,0 +1,14 @@
+# Direct runtime dependencies; use requirements-mac.lock.txt for tested versions.
+# Upstream tdqm replaced with tqdm (the actual imported module).
+# Notebook UI is optional; plotting .py scripts do not need it.
+numpy<2
+matplotlib
+gurobipy
+pandas
+tqdm
+intervaltree
+pyarrow==17.0.0
+scienceplots
+lz4
+cvxpy[GLPK]
+scipy
