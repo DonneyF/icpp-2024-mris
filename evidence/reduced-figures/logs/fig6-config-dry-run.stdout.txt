@@ -1,0 +1,6 @@
+{"raw_vm_rows": 5559800, "filtered_jobs": 4664759, "vm_types": 488, "vmType_rows": 4619, "release_max_days": 12.386006944347173, "load_seconds": 9.459105209010886, "rss_after_load": 1048182784}
+{"factor": 64, "jobs": 64000, "M": 20, "R": 4, "run": 1, "offset": 15, "release_span_days": [2.314802259206772e-05, 12.38586805574596], "schedulers": null, "demand_shape": [64000, 4], "rss_after_build": 1170800640}
+{"factor": 64, "jobs": 64000, "M": 20, "R": 20, "run": 1, "offset": 40, "release_span_days": [8.101854473352432e-05, 12.385960648301989], "schedulers": null, "demand_shape": [64000, 20], "rss_after_build": 1079345152}
+{"factor": 128, "jobs": 32000, "M": 20, "R": 4, "run": 1, "offset": 26, "release_span_days": [3.472203388810158e-05, 12.385706018656492], "schedulers": null, "demand_shape": [32000, 4], "rss_after_build": 543686656}
+{"factor": 128, "jobs": 32000, "M": 20, "R": 20, "run": 1, "offset": 57, "release_span_days": [0.0001157405786216259, 12.385844907257706], "schedulers": null, "demand_shape": [32000, 20], "rss_after_build": 556957696}
+{"status": "PASS", "total_wall_seconds": 12.321777167002438, "peak_rss_bytes": 1177976832}

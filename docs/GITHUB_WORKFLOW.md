@@ -54,10 +54,10 @@ Recommend main protection requiring `smoke`, one peer approval, up-to-date branc
 | Issues | Responsibility | Current work |
 |---|---|---|
 | #2, #3, #4 | Member 1 | Repo/access, second-Mac check, dependency validation |
-| #5 | Members 2–4, Member 1 review | Serial Azure pilot; synthetic validation already passed |
+| #5 | Member 1, Members 2–4 review | Serial Azure pilot passed (1,000 and 8,000 jobs); see AZURE_VALIDATION.md |
 | #6 | Member 2 | Figure 3 |
 | #7 | Member 3 | Figure 4 |
-| #8 | Member 4 | Figure 6; resolve 32k/64k discrepancy |
+| #8 | Member 4 | Figure 6; 64k (factor 64) primary per FIGURE6_JOB_COUNT.md, factor 128 kept separate |
 | #9 | All four | Each analyzes own work and cross-reviews |
 | #10, #11 | All four | Later slides/report with actual contribution records |
 | #12 | Member 1 coordinates; all demonstrate | Later demonstration video |

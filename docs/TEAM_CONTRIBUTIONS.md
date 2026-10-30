@@ -4,12 +4,21 @@ These are provisional role numbers, not invented identities or account assignmen
 
 | Member | Primary responsibility | Issues | Review duty | Evidence to contribute |
 |---|---|---|---|---|
-| 1 | GitHub, Mac installation, CI, dataset provenance, demo coordination | #2–4, coordinates #12 | Shared setup and experiment reproducibility | Second-Mac setup log, package lock checks, hardware/RAM measurements, review links |
-| 2 | Figure 3: number of jobs / arrival rate | #6, shares #5 and #9 | Member 3's Figure 4 | Input manifest, raw results, commands, plot and explanation |
-| 3 | Figure 4: number of machines | #7, shares #5 and #9 | Member 4's Figure 6 | Same evidence for machine-count sweep |
-| 4 | Figure 6: number of resources | #8, shares #5 and #9 | Member 2's Figure 3 | Resource seed/cache hashes, 32k/64k decision, results and explanation |
+| 1 | Mac compatibility, Azure pilot, shared testing documentation | #2–#5, coordinates #12 | Runner, memory and evidence records in every figure PR | Second-Mac pilot run, RAM/time measurements, review links |
+| 2 | Figure 3: number of jobs / arrival rate | #6, shares #9 | Member 3's Figure 4 | Manifest (`summary.json`), raw Parquet hashes, plot, comparison with paper |
+| 3 | Figure 4: number of machines | #7, shares #9 | Member 4's Figure 6 | Same evidence for the machine-count sweep |
+| 4 | Figure 6: number of resource types | #8, shares #9 | Member 2's Figure 3 | Same evidence; factor-64 primary and factor-128 variant kept separate |
 
-All four contribute their own verified sections to #10/#11 later and demonstrate their own workflow in #12. Members 2–4 jointly develop/review the bounded serial Azure path before attempting full sweeps. Member 4's additional augmentation work should be balanced by Member 1 handling packaging and Member 2 handling the shared plot conventions.
+## Independent work: verified starting points (2026-10-29)
+
+Each figure has its own runner step, output folder and Parquet name pattern, so the work can proceed in parallel without shared state. Every `run_reduced_figures.sh` step and the pilot command below was executed on the 8 GB M2 (see AZURE_VALIDATION.md); suggested next steps are not yet run. Each member should first bring their branch up to date with `main` after this PR merges (`git switch <branch> && git merge --ff-only origin/main`) and use a new output root each time.
+
+- **Member 1 (`setup/mac-support`):** repeat `scripts/azure_pilot.py --experiment jobs --factors 4096 --output-dir results/pilot-<laptop>` on a second Mac. Compare the AWCT values with `evidence/azure-pilot/1000-jobs/summary.json` (same seed 2026 and offset 975 should give identical values) and record RSS and time. Keep the runner, troubleshooting and evidence conventions consistent across figure PRs.
+- **Member 2 (`experiments/jobs`, Figure 3):** `scripts/run_reduced_figures.sh results/<root> fig3` (~17 min) reproduces the committed reduced sweep. The next step towards the paper is a 16,000-job point (`--factors 256`, one offset per invocation; not yet run, extrapolated at roughly 20–30 min per offset with MRIS dominating) to start testing the published crossover.
+- **Member 3 (`experiments/machines`, Figure 4):** `scripts/run_reduced_figures.sh results/<root> fig4` (~14 min). The reduced sweep only reaches the paper's light-load side. Next, design a higher per-machine-load run (for example 8,000 jobs on M = 2 / 3 / 5) and document it as not a paper configuration, or plan a 64,000-job single point on HPC.
+- **Member 4 (`experiments/resources`, Figure 6):** `scripts/run_reduced_figures.sh results/<root> fig6 fig6-loaded fig6-config` (~26 min). Use factor 64 (64,000 jobs) as the primary configuration and keep factor 128 in a separate folder. Read FIGURE6_JOB_COUNT.md and review its visual readings independently.
+
+All four contribute their own verified sections to #10/#11 later and demonstrate their own workflow in #12. The bounded serial Azure path now exists (`scripts/azure_pilot.py`); Members 2–4 review it for their figure before extending it. Member 4's additional augmentation work should be balanced by Member 1 handling packaging and Member 2 handling the shared plot conventions.
 
 ## Contribution log (fill with real work)
 

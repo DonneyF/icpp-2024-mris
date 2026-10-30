@@ -7,7 +7,9 @@
 - Import error for scheduler: run team script from checkout, or use `PYTHONPATH="$PWD"` for upstream experiments.
 - Missing results directory: `mkdir -p experiments/results` before upstream runs.
 - Empty experiment 1 results: its run.sh invocation is commented out; invoke the Python script deliberately only after resource review.
-- Memory pressure: stop the full parallel run. Downsampling happens after loading all jobs. A serial bounded pilot is the next implementation task.
+- Memory pressure: stop the full parallel run. Downsampling happens after loading all jobs. Use `scripts/azure_pilot.py` (serial, holds the trace as arrays, `--max-rss-mb` watchdog, measured peak about 1.2–1.3 GB).
+- `summary.json` says `PASS_WITH_WARNINGS`: only the known collect-all PQ (`PQ-WSJF`, paper CA-PQ) `np.isclose` capacity overlap was found; every other check passed. `FAIL` with `RSS ... exceeded limit` means the watchdog stopped the run; close other apps or reduce the job count rather than raising the limit blindly.
+- `A point exceeds --max-jobs`: deliberate guardrail. Raise `--max-jobs` only for a single-point run you intend to leave running for hours.
 - Plot missing parquet files: select only the plot function with complete inputs; all-plots assumes every experiment exists.
 - Repeatability mismatch: regenerate fresh job/machine objects, retain preprocessing seed and selected offsets, and compare the same input checksum.
 - A pip cache permission warning in the sandbox does not mean installation failed. Do not use sudo. The environment was installed successfully and pip check passed.

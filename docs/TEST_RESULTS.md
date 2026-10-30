@@ -32,6 +32,16 @@ Raw `MRIS.parquet` and `OnlinePriorityQueue.parquet` were produced locally in `r
 
 **PASS**: downloaded 181,116,928 bytes from the specified Zenodo v1 link, matched published MD5 `fd7a6e124920eaeab25178f7363a5df3`, and passed read-only SQLite quick_check and required table/column checks. See `evidence/dataset-verification.json`. Database is ignored by Git. Full trace preprocessing, all five baseline sweeps and published-scale runtime/RAM: **NOT TESTED**.
 
+## Azure pilot and reduced-scale figures (2026-10-29)
+
+Full details are in [AZURE_VALIDATION.md](AZURE_VALIDATION.md).
+
+- 1,000-job pilot: PASS, 18.7 s, peak RSS 1.14 GiB.
+- 8,000-job pilot (the paper's smallest Figure 3 point): 408.5 s, peak RSS 1.17 GiB. MRIS 10.09, CA-PQ 15.59, PQ/Tetris/BF-EXEC 7.17–7.21. The paper shows ≈10 / ≈15.5 / ≈7.
+- Reduced sweeps: 170 scheduler runs, all `PASS_WITH_WARNINGS`. The only warning is the upstream `np.isclose` capacity overlap in collect-all PQ (`scheduler/pq.py:123`); every other check passed for all five schedulers.
+- Figure 6 job-count discrepancy: the evidence favours 64,000 jobs. See [FIGURE6_JOB_COUNT.md](FIGURE6_JOB_COUNT.md).
+- Published-size sweeps remain NOT TESTED.
+
 ## Historical first setup run
 
 The section below records the original 16-job run and its measurements. Its old script command/output paths and hardware-access/CI status describe that execution only; use the current EXPERIMENTS.md commands for new runs.
@@ -62,7 +72,7 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 /usr/bin/time -p .venv/bin/python scrip
 | C: paper baseline | OnlinePriorityQueue-WSJF schedules identical jobs feasibly | All assertions passed; AWCT 19.75 | PASS |
 | D: repeatability | Fresh seed-2026 input twice per scheduler yields identical starts, assignments, completions, AWCT | Exact equality assertions passed | PASS |
 | E: resource measurement | Capture wall/CPU/peak memory for small run | Whole process 6.44 s real, 2.11 s user, 0.50 s system; about 40.5% average one-core CPU; peak RSS 206569472 bytes (197.0 MiB) | PASS, tiny workload only |
-| Azure traces / full figures | Full data and published sweeps | Not executed | NOT TESTED |
+| Azure traces / full figures | Full data and published sweeps | Bounded Azure pilot and reduced-scale sweeps executed (see AZURE_VALIDATION.md); published-size sweeps not executed | Reduced-scale PASS_WITH_WARNINGS; full NOT TESTED |
 | Intel / Docker / hosted CI | Verify execution on other targets | Not executed | NOT TESTED |
 
 CPU percentage is `(user + system) / real * 100`, averaged across imports and validation, not scheduler-only utilization. Peak RSS comes from macOS `getrusage`, not an 8 GB-machine guarantee. `/usr/bin/time -l` was restricted by the sandbox's kern.clockrate access; portable `time -p` plus Python resource measurement succeeded. Physical installed RAM could not be queried in the sandbox.

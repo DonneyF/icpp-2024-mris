@@ -19,14 +19,15 @@ Critical: the loader reads full database tables, constructs all jobs, and only t
 ## Reproduction risks
 
 1. `run.sh` experiment 1 has its Python invocation commented out: it can print progress without computing results.
-2. `run.sh` experiment 5 uses factor 128 (32,000 jobs), unlike Figure 6's caption (64,000 jobs). Track the discrepancy explicitly before selecting factor 64 for a caption-matched run.
+2. `run.sh` experiment 5 uses factor 128 (32,000 jobs), unlike Figure 6's caption (64,000 jobs). A cross-figure check now shows the published Figure 6 matches 64,000 jobs; use factor 64 as primary and keep factor-128 output separate. See FIGURE6_JOB_COUNT.md.
 3. Random preprocessing uses NumPy without a fixed seed; run.sh uses unseeded random offsets. Fix and record both preprocessing seed and offset manifest, and share checksummed caches before comparing machines.
 4. `generate_all_plots.py` expects all experiments' inputs by default and uses confidence intervals. Invoke only the selected plot functions; a single run cannot establish a 95% confidence interval.
 5. No LICENSE file found in GitHub checkout. Preserve attribution/history, prefer a GitHub fork, and clarify reuse terms before repackaging/relicensing. Zenodo v1 is not assumed identical to current GitHub main.
-6. Static inspection suggests the WERF branch may use an unfiltered release vector; untested variants are not validated by WSJF smoke tests. No algorithm changes were made.
+6. `scheduler/pq.py:123` (collect-all PQ, the paper's CA-PQ baseline) frees every job whose completion time is `np.isclose` (rtol 1e-5) to the current one, so near-simultaneous completions are released early and the schedule can exceed machine capacity briefly. This was observed on the Azure trace (overlap 2.2e-7 days, excess 0.98 of 10 capacity units); all violations disappear under that tolerance. Not changed; reported as a baseline caveat. See AZURE_VALIDATION.md.
+7. Static inspection suggests the WERF branch may use an unfiltered release vector; untested variants are not validated by WSJF smoke tests. No algorithm changes were made.
 
 ## Assessment
 
 Native ARM64 dependency installation and pip consistency checks succeeded. See TEST_RESULTS.md for actual algorithm results. Intel Macs, Docker, full trace loading, all variants, and published-figure reproduction remain NOT TESTED. First advance to a bounded serial trace pilot with memory measurement; consider university HPC if full data loading exceeds laptop capacity.
 
-Follow-up: hardware verified as an 8 GB M2 MacBook Air (Mac14,2), 8 cores. Native 128-job serial simulation and Linux hosted smoke checks passed. Full trace/figure memory and runtime are still unknown. The released default uses a GLPK integer knapsack solve rather than an explicit CADP routine; reproducing the code does not independently verify the paper's theoretical runtime.
+Follow-up: hardware verified as an 8 GB M2 MacBook Air (Mac14,2), 8 cores. Native 128-job serial simulation and Linux hosted smoke checks passed. Bounded serial Azure runs (scripts/azure_pilot.py) peaked at 1.17–1.26 GB for up to 8,000 jobs, and MRIS took 182–230 s per 8,000-job run; full-figure runtime remains unmeasured (extrapolated to hours per 64,000-job MRIS run). See AZURE_VALIDATION.md. The released default uses a GLPK integer knapsack solve rather than an explicit CADP routine; reproducing the code does not independently verify the paper's theoretical runtime.
