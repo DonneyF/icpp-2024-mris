@@ -26,7 +26,7 @@ Experiments use `multiprocessing` to run schedulers in parallel. Each scheduler 
 
 ## Obtaining Data
 
-The primary datasource is the [Azure Packing 2020](https://github.com/Azure/AzurePublicDataset/blob/master/AzureTracesForPacking2020.md) dataset. The Azure Packing dataset contains 5 distinct resource types, which is later reduced to 4 by combining the SSD/HDD values. As we also investigate the effect of the number of resource types, we also synthetically generate additional resource types. 
+The primary datasource is the [Azure Packing 2020](https://github.com/Azure/AzurePublicDataset/blob/master/AzureTracesForPacking2020.md) dataset. The Azure Packing dataset contains 5 distinct resource types, which is later reduced to 4 by combining the SSD/HDD values. As we also investigate the effect of the number of resource types, we also synthetically generate additional resource types.
 - See `experiments/tools.py` for specifics on how the dataset is imported and augmented.
 
 The datasets should be stored in `experiments/data/`. We provide a script to download and automatically generate and compress these datasets (takes perhaps 30 minutes).
@@ -177,7 +177,7 @@ The Python dependencies needed for plotting only are provided below:
 python3 -m pip install numpy<2 matplotlib pandas pyarrow scienceplots lz4 notebook
 ```
 
-> [!WARNING]  
+> [!WARNING]
 > To use the `scienceplots` package to replicate the figures, a LaTeX install is required. Otherwise, remove the block on stylizing the plots.
 
 ### Renku
@@ -188,7 +188,7 @@ We have provided a Renku project here: https://renkulab.io/projects/donney.fan/i
 
 To upload data to the Session (JupterLab instance), you can use webui to upload files, the terminal to download from remote storage with `wget` or `rclone`, or [mount cloud storage to the instance](https://renku.readthedocs.io/en/stable/how-to-guides/renkulab/external-storage.html). The container provides 20GB of scratch space, which should be enough for a large ZIP file that contains all the results and its decompressed space.
 
- 
+
 ## Variations in Results
 
 There some possibilities that there could be run to run variations.
