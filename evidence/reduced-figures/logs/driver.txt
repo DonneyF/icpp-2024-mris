@@ -1,0 +1,24 @@
+== fig3-jobs: 2026-10-29 21:28:47
+System-wide memory free percentage: 38%
+System-wide memory free percentage: 41%
+     1001.16 real       967.60 user        23.11 sys
+          1263550464  maximum resident set size
+          1578665760  peak memory footprint
+{"status": "PASS_WITH_WARNINGS", "total_wall_seconds": 998.5864412079973, "peak_rss_bytes": 1263550464}
+exit=0
+== fig4-machines: 2026-10-29 21:45:28
+System-wide memory free percentage: 41%
+System-wide memory free percentage: 41%
+      816.39 real       798.70 user        20.63 sys
+          1168719872  maximum resident set size
+          1578813216  peak memory footprint
+{"status": "PASS_WITH_WARNINGS", "total_wall_seconds": 813.5294793749927, "peak_rss_bytes": 1168719872}
+exit=0
+== fig6-resources: 2026-10-29 21:59:05
+System-wide memory free percentage: 41%
+System-wide memory free percentage: 66%
+     1001.06 real       977.11 user        25.76 sys
+          1045921792  maximum resident set size
+          1578813216  peak memory footprint
+{"status": "PASS_WITH_WARNINGS", "total_wall_seconds": 998.4302185419947, "peak_rss_bytes": 1045921792}
+exit=0

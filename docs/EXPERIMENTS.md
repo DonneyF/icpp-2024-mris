@@ -20,13 +20,8 @@ Outputs: `inputs.json`, `summary.json`, `MRIS.parquet`, `OnlinePriorityQueue.par
 
 The reviewed 128-job evidence is under `evidence/initial-simulation/`, including inputs, schedules in summary.json, console/timing logs and generated-file checksums. The corresponding Parquet files remain local under ignored `results/initial-128/` and can be regenerated. These results do not reproduce Azure traces or any paper figure. Arbitrary synthetic time units are not Azure days.
 
-## Next: bounded serial Azure pilot
+## Azure trace runs
 
-1. Use the checksummed SQLite source described in MAC_SETUP.md.
-2. Add a separately reviewed bounded loader/serial runner without editing the scheduler algorithms. Match upstream filtering, priority transformation, storage merging, machine capacities and time units. Record intentional deviations from full-data sampling. Neither simply increasing downsampling nor replacing the pool alone removes full-load memory cost.
-3. Begin with 100–1000 trace jobs and one scheduler at a time. Freeze selected job IDs, preprocessing seed, downsample offsets and resource augmentation. Check validity before increasing size.
-4. Compare all five paper schedulers with identical deep-copied inputs. AWCT is `sum(w*C)/N`; use the upstream label mapping in FIGURE_REPRODUCTION.md.
-5. Save raw outputs and measure memory/time. Scale only after reviewing memory pressure. Use university HPC if full preprocessing exceeds laptop capacity.
-6. Generate only clearly labeled reduced-scale preliminary curves until published parameters and repeated trials can be run.
+The bounded serial Azure pilot is implemented and passed: `scripts/azure_pilot.py` (one scheduler at a time, trace held as arrays, seeded sampling, RSS watchdog). Reduced-scale Figure 3/4/6 sweeps are driven by `scripts/run_reduced_figures.sh` and plotted by `scripts/plot_reduced_figures.py`. Commands, measured runtime/RAM, results, deviations from upstream and limitations are in [AZURE_VALIDATION.md](AZURE_VALIDATION.md); the figure/parameter mapping is in [FIGURE_REPRODUCTION.md](FIGURE_REPRODUCTION.md).
 
-Published-scale comparisons require 10 sampled offsets per point and mean/95% confidence intervals. One run does not support a confidence band. A seed and exact selection manifest are required for repeatability, though different solver versions may resolve tied optima differently. Full Azure preprocessing, published sweeps and their runtimes remain NOT TESTED.
+Published-scale comparisons require 10 sampled offsets per point and mean/95% confidence intervals. Two offsets give a very wide t-interval (t = 12.7 at df = 1), so reduced runs show trends, not significance. Full Azure figure sweeps at published size remain NOT TESTED.
