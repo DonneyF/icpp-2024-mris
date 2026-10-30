@@ -1,6 +1,6 @@
 # Three-figure reproduction plan
 
-Source: [ICPP 2024 paper](https://www.comm.utoronto.ca/~liang/publications/ICPP2024_FL.pdf), page 9. Captions below are paraphrased. All three compare MRIS-WSJF, CA-PQ-WSJF, PQ-WSJF, Tetris, and BF-EXEC using AWCT. No reproduction figures have been generated.
+Source: [ICPP 2024 paper](https://www.comm.utoronto.ca/~liang/publications/ICPP2024_FL.pdf), page 9. The mappings were rechecked against the full paper during PR review. Captions below are paraphrased. All three compare MRIS-WSJF, CA-PQ-WSJF, PQ-WSJF, Tetris, and BF-EXEC using AWCT. No reproduction figures have been generated.
 
 | Figure | Measurement | Script and parameters | Raw file under experiments/results | Plot function / PNG |
 |---|---|---|---|---|
@@ -23,3 +23,32 @@ Expand each sweep with 10 recorded offsets per point only after the serial pilot
 Plot selectively after all required raw files exist: import `experiments.generate_all_plots as plots` and `numpy as np`, set `plots.PATH_TO_RESULTS` to the appropriate results directory, and call the corresponding function in the table. PNGs are saved in the current working directory. Matching `.ipynb` notebooks also exist. Do not run the all-plots entrypoint against partial results.
 
 Cheapest preliminary order: reuse a small four-resource dataset for a jobs sweep, then machines, then resource augmentation. These reduced-scale curves cannot be labeled as full paper reproductions. Figure 5 is a possible fallback because it reuses the job benchmark schedules; its CDF is a distinct comparison, subject to instructor acceptance.
+
+## Ownership and limits
+
+Member 2 owns Figure 3 on `experiments/jobs`; Member 3 owns Figure 4 on `experiments/machines`; Member 4 owns Figure 6 on `experiments/resources`. Member 1 reviews shared environment and memory evidence. These assignments now correspond to verified published figures, not assumptions based only on script names.
+
+Figure 3 job counts are 8,000, 16,000, 32,000, 64,000, 128,000 and 256,000. Figure 4 uses four machine counts, with 64,000 jobs. Figure 6 uses 4–20 resources with 20 machines. Keep factor 64 (caption-matched 64,000 jobs) separate from factor 128 (upstream shell-script 32,000 jobs); neither resolves the authors' intended experiment conclusively. Do not label an upstream-default 32,000-job curve as matching the caption.
+
+Source labels: `PQ-WSJF` is the collect-all baseline (paper CA-PQ-WSJF), while `OnlinePQ-WSJF` is the paper PQ-WSJF. Preserve this mapping in analysis. The default implementation solves a binary knapsack through GLPK_MI, whereas the paper describes CADP; preserve released code and report that distinction instead of claiming to have independently validated the paper's theoretical runtime.
+
+All three are candidates for eventual reproduction on the Mac after a memory-bounded runner is validated. The native small synthetic test passed on an 8 GB M2 MacBook Air; none of the full Azure figure sweeps has been run. Exact full-sweep RAM/runtime is unknown. Resource augmentation creates multiple caches and is likely the most demanding setup, but that ranking is not measured.
+
+For a complete set of 10 runs, generate selected plots from the repo root:
+
+```sh
+mkdir -p results/figures
+MPLBACKEND=Agg MPLCONFIGDIR="$PWD/.cache/matplotlib" PYTHONPATH="$PWD" python - <<'PYTHON'
+from pathlib import Path
+import os
+import numpy as np
+from experiments import generate_all_plots as plots
+plots.PATH_TO_RESULTS = Path('experiments/results').resolve()
+os.chdir('results/figures')
+plots.scheduler_benchmark_jobs(4096000, np.array([512,256,128,64,32,16]), 10)
+plots.scheduler_benchmark_machines(np.array([5,10,20,40]), 10)
+plots.scheduler_benchmark_resources(np.arange(4,21), 10)
+PYTHON
+```
+
+This plotting command is prepared but NOT EXECUTED: its required raw results do not yet exist. Use a separate results directory for each incompatible parameter set; never mix preliminary runs with full-scale runs. Expected PNG names are listed above. No placeholder curves have been created.

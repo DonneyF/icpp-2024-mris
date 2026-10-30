@@ -12,7 +12,7 @@ Audited 2026-10-29 at upstream commit `a35216c9f2511d905b71e31dffb445d6d58220e9`
 
 ## Data and resources
 
-`experiments/tools.py` loads Azure Packing 2020 from `experiments/data/packing_trace_zone_a_v1.sqlite`, generating `azure_packing_2020_R.pickle.lz4` caches. The cited Zenodo v1 record lists a 181.1 MB SQLite file. The downloader uses a Backblaze mirror and wget. Neither full dataset download nor preprocessing was executed in this setup phase.
+`experiments/tools.py` loads Azure Packing 2020 from `experiments/data/packing_trace_zone_a_v1.sqlite`, generating `azure_packing_2020_R.pickle.lz4` caches. The cited Zenodo v1 record lists a 181.1 MB SQLite file. The downloader uses a Backblaze mirror and wget. Follow-up verification downloaded the 181,116,928-byte SQLite source, matched its published MD5 and passed SQLite quick_check. Full preprocessing is still not executed; see evidence/dataset-verification.json.
 
 Critical: the loader reads full database tables, constructs all jobs, and only then experiment scripts downsample. Increasing the downsample factor does not remove the full-load RAM cost. Workers receive copied datasets and the default pool size is CPU count. Upstream estimates 2–8 GB per scheduler, so default parallel runs are unsuitable as an initial test on an 8 GB laptop. Exact peak RAM and runtime of full experiments are unknown. The installed virtual environment measured about 521 MB; total dataset caches/result storage is unmeasured. Reserve several GB as a planning allowance, not a measured minimum.
 
@@ -28,3 +28,5 @@ Critical: the loader reads full database tables, constructs all jobs, and only t
 ## Assessment
 
 Native ARM64 dependency installation and pip consistency checks succeeded. See TEST_RESULTS.md for actual algorithm results. Intel Macs, Docker, full trace loading, all variants, and published-figure reproduction remain NOT TESTED. First advance to a bounded serial trace pilot with memory measurement; consider university HPC if full data loading exceeds laptop capacity.
+
+Follow-up: hardware verified as an 8 GB M2 MacBook Air (Mac14,2), 8 cores. Native 128-job serial simulation and Linux hosted smoke checks passed. Full trace/figure memory and runtime are still unknown. The released default uses a GLPK integer knapsack solve rather than an explicit CADP routine; reproducing the code does not independently verify the paper's theoretical runtime.

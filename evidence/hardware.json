@@ -1,0 +1,10 @@
+{
+  "model": "MacBook Air",
+  "model_identifier": "Mac14,2",
+  "chip": "Apple M2",
+  "memory_bytes": 8589934592,
+  "cpu_cores": 8,
+  "architecture": "arm64",
+  "macOS": "26.3",
+  "source": "sysctl hw.model hw.memsize hw.ncpu and system_profiler SPHardwareDataType; identifiers omitted"
+}
