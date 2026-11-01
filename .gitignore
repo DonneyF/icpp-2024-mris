@@ -50,3 +50,15 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+
+# Team reproduction artifacts
+.DS_Store
+experiments/data/
+experiments/results/
+results/
+*.pickle
+*.pickle.lz4
+*.parquet
+*.sqlite
+*.zip
+*.log
