@@ -1,0 +1,244 @@
+{
+  "status": "PASS_WITH_WARNINGS",
+  "scope": "Bounded serial run on the Azure trace; not a full paper reproduction",
+  "argv": [
+    "scripts/azure_pilot.py",
+    "--output-dir",
+    "results/member4/chunks/r20",
+    "--experiment",
+    "resources",
+    "--factors",
+    "256",
+    "--machines",
+    "5",
+    "--resources",
+    "20",
+    "--runs",
+    "2",
+    "--max-jobs",
+    "16000"
+  ],
+  "config": {
+    "experiment": "resources",
+    "factors": [
+      256
+    ],
+    "machines": [
+      5
+    ],
+    "resources": [
+      20
+    ],
+    "runs": 2,
+    "seed": 2026,
+    "schedulers": [
+      "MRIS-WSJF",
+      "PQ-WSJF",
+      "OnlinePQ-WSJF",
+      "Tetris",
+      "BF-EXEC"
+    ],
+    "max_jobs": 16000,
+    "max_rss_mb": 2500,
+    "output_dir": "results/member4/chunks/r20",
+    "dry_run": false
+  },
+  "git_commit": "2c69d35c7825b0f2a2590cdd9c108acde06fad34",
+  "runner_sha256": "5cbac9bbe9ea02193a32cb29cfd81dcede39a545f626fe3ad839eeaaec455ea3",
+  "python": "3.12.6",
+  "machine": "arm64",
+  "threads": {
+    "OPENBLAS_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1"
+  },
+  "results": [
+    {
+      "factor": 256,
+      "jobs": 16000,
+      "M": 5,
+      "R": 20,
+      "run": 1,
+      "offset": 60,
+      "release_span_days": [
+        0.0001157405786216259,
+        12.385613426100463
+      ],
+      "schedulers": {
+        "MRIS-WSJF": {
+          "awct": 21.257871277417667,
+          "wall_seconds": 439.1542652081698,
+          "cpu_seconds": 468.650735,
+          "rss_after": 132349952,
+          "peak_rss_so_far": 1513832448,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.999876482424952e-09
+          }
+        },
+        "PQ-WSJF": {
+          "awct": 49.48267300712914,
+          "wall_seconds": 63.03072533290833,
+          "cpu_seconds": 62.873654999999985,
+          "rss_after": 215941120,
+          "peak_rss_so_far": 1513832448,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": false,
+            "max_capacity_excess": 12.700320502820539,
+            "capacity_respected_within_pq_isclose_tolerance": true,
+            "max_capacity_excess_within_tolerance": -9.999858718856558e-09
+          }
+        },
+        "OnlinePQ-WSJF": {
+          "awct": 39.17526880219468,
+          "wall_seconds": 310.496820458211,
+          "cpu_seconds": 309.883774,
+          "rss_after": 114524160,
+          "peak_rss_so_far": 1513832448,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.99985338978604e-09
+          }
+        },
+        "Tetris-instantaneous": {
+          "awct": 40.27080286503912,
+          "wall_seconds": 249.33933766605332,
+          "cpu_seconds": 248.69293100000004,
+          "rss_after": 105152512,
+          "peak_rss_so_far": 1513832448,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.999858718856558e-09
+          }
+        },
+        "BF-EXEC": {
+          "awct": 40.929095337964156,
+          "wall_seconds": 104.9956452078186,
+          "cpu_seconds": 104.98312599999986,
+          "rss_after": 205586432,
+          "peak_rss_so_far": 1513832448,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.99985338978604e-09
+          }
+        }
+      },
+      "parquet": "5_scheduler_benchmark_resources_20_1.parquet",
+      "parquet_sha256": "44c086032b2679547e322f45c0e72219d951a75b7f766ed8a209ca97c8cb7e34"
+    },
+    {
+      "factor": 256,
+      "jobs": 16000,
+      "M": 5,
+      "R": 20,
+      "run": 2,
+      "offset": 163,
+      "release_span_days": [
+        0.00012731458991765976,
+        12.38574074069038
+      ],
+      "schedulers": {
+        "MRIS-WSJF": {
+          "awct": 21.906606217854684,
+          "wall_seconds": 393.864327208139,
+          "cpu_seconds": 421.7475689999999,
+          "rss_after": 121913344,
+          "peak_rss_so_far": 1513832448,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.999869376997594e-09
+          }
+        },
+        "PQ-WSJF": {
+          "awct": 54.87901007318817,
+          "wall_seconds": 59.79457158269361,
+          "cpu_seconds": 59.770876000000044,
+          "rss_after": 221626368,
+          "peak_rss_so_far": 1513832448,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": false,
+            "max_capacity_excess": 6.654487169487233,
+            "capacity_respected_within_pq_isclose_tolerance": true,
+            "max_capacity_excess_within_tolerance": -9.999858718856558e-09
+          }
+        },
+        "OnlinePQ-WSJF": {
+          "awct": 47.34591980053752,
+          "wall_seconds": 283.4187548328191,
+          "cpu_seconds": 282.52208599999994,
+          "rss_after": 122355712,
+          "peak_rss_so_far": 1513832448,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.999844508001843e-09
+          }
+        },
+        "Tetris-instantaneous": {
+          "awct": 48.511411468880866,
+          "wall_seconds": 268.8476379578933,
+          "cpu_seconds": 268.753279,
+          "rss_after": 225116160,
+          "peak_rss_so_far": 1513832448,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.999846284358682e-09
+          }
+        },
+        "BF-EXEC": {
+          "awct": 48.24201172961385,
+          "wall_seconds": 115.51243887469172,
+          "cpu_seconds": 115.12684399999989,
+          "rss_after": 99024896,
+          "peak_rss_so_far": 1513832448,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.999856942499719e-09
+          }
+        }
+      },
+      "parquet": "5_scheduler_benchmark_resources_20_2.parquet",
+      "parquet_sha256": "66738a97184abac29ed60db57a49f0aba3d1c3994083add67439376fe720234f"
+    }
+  ],
+  "trace": {
+    "raw_vm_rows": 5559800,
+    "filtered_jobs": 4664759,
+    "vm_types": 488,
+    "vmType_rows": 4619,
+    "release_max_days": 12.386006944347173,
+    "load_seconds": 4.353689291048795,
+    "rss_after_load": 1179090944
+  },
+  "total_wall_seconds": 2294.95066050021,
+  "peak_rss_bytes": 1513832448,
+  "watchdog_max_rss_bytes": 1322909696
+}
