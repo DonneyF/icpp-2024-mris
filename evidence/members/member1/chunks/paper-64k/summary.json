@@ -1,0 +1,158 @@
+{
+  "status": "PASS_WITH_WARNINGS",
+  "scope": "Bounded serial run on the Azure trace; not a full paper reproduction",
+  "argv": [
+    "scripts/azure_pilot.py",
+    "--output-dir",
+    "results/member1/chunks/paper-64k",
+    "--experiment",
+    "jobs",
+    "--factors",
+    "64",
+    "--machines",
+    "20",
+    "--resources",
+    "4",
+    "--runs",
+    "1",
+    "--max-jobs",
+    "64000",
+    "--max-rss-mb",
+    "3000"
+  ],
+  "config": {
+    "experiment": "jobs",
+    "factors": [
+      64
+    ],
+    "machines": [
+      20
+    ],
+    "resources": [
+      4
+    ],
+    "runs": 1,
+    "seed": 2026,
+    "schedulers": [
+      "MRIS-WSJF",
+      "PQ-WSJF",
+      "OnlinePQ-WSJF",
+      "Tetris",
+      "BF-EXEC"
+    ],
+    "max_jobs": 64000,
+    "max_rss_mb": 3000,
+    "output_dir": "results/member1/chunks/paper-64k",
+    "dry_run": false
+  },
+  "git_commit": "9bd5fb7ddcdd77258413f5e774884cf3e540b3de",
+  "runner_sha256": "5cbac9bbe9ea02193a32cb29cfd81dcede39a545f626fe3ad839eeaaec455ea3",
+  "python": "3.12.14",
+  "machine": "arm64",
+  "threads": {
+    "OPENBLAS_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1"
+  },
+  "results": [
+    {
+      "factor": 64,
+      "jobs": 64000,
+      "M": 20,
+      "R": 4,
+      "run": 1,
+      "offset": 15,
+      "release_span_days": [
+        2.314802259206772e-05,
+        12.38586805574596
+      ],
+      "schedulers": {
+        "MRIS-WSJF": {
+          "awct": 17.284681639010987,
+          "wall_seconds": 14041.22070854099,
+          "cpu_seconds": 14300.822447,
+          "rss_after": 177258496,
+          "peak_rss_so_far": 1102446592,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.999981287478477e-09
+          }
+        },
+        "PQ-WSJF": {
+          "awct": 26.13575021172392,
+          "wall_seconds": 1801.6581546659581,
+          "cpu_seconds": 1795.2943130000003,
+          "rss_after": 156221440,
+          "peak_rss_so_far": 1102446592,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": false,
+            "max_capacity_excess": 4.999999990000001,
+            "capacity_respected_within_pq_isclose_tolerance": true,
+            "max_capacity_excess_within_tolerance": -9.999983063835316e-09
+          }
+        },
+        "OnlinePQ-WSJF": {
+          "awct": 20.629789736735983,
+          "wall_seconds": 6890.384277083038,
+          "cpu_seconds": 6870.710354999999,
+          "rss_after": 274399232,
+          "peak_rss_so_far": 1102446592,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.999986616548995e-09
+          }
+        },
+        "Tetris-instantaneous": {
+          "awct": 20.35460048540074,
+          "wall_seconds": 4078.51894941699,
+          "cpu_seconds": 4065.910017000002,
+          "rss_after": 273694720,
+          "peak_rss_so_far": 1102446592,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.999986616548995e-09
+          }
+        },
+        "BF-EXEC": {
+          "awct": 19.399258335324557,
+          "wall_seconds": 2400.2184367500013,
+          "cpu_seconds": 2392.5268429999996,
+          "rss_after": 268075008,
+          "peak_rss_so_far": 1102446592,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.999991945619513e-09
+          }
+        }
+      },
+      "parquet": "3_scheduler_benchmark_jobs_64_1.parquet",
+      "parquet_sha256": "33d3d6769b56f93f09e7dd5ba46051269add9b3e3daf912a033f7b4f944a9cb0"
+    }
+  ],
+  "trace": {
+    "raw_vm_rows": 5559800,
+    "filtered_jobs": 4664759,
+    "vm_types": 488,
+    "vmType_rows": 4619,
+    "release_max_days": 12.386006944347173,
+    "load_seconds": 10.245819959032815,
+    "rss_after_load": 844709888
+  },
+  "total_wall_seconds": 29228.323938417016,
+  "peak_rss_bytes": 1102446592,
+  "watchdog_max_rss_bytes": 1091059712
+}
