@@ -1,0 +1,14 @@
+Collecting pyarrow==17.0.0
+  Downloading pyarrow-17.0.0-cp312-cp312-macosx_11_0_arm64.whl.metadata (3.3 kB)
+Requirement already satisfied: numpy>=1.16.6 in ./.venv/lib/python3.12/site-packages (from pyarrow==17.0.0) (1.26.4)
+Downloading pyarrow-17.0.0-cp312-cp312-macosx_11_0_arm64.whl (27.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 27.2/27.2 MB 24.2 MB/s eta 0:00:00
+Installing collected packages: pyarrow
+  Attempting uninstall: pyarrow
+    Found existing installation: pyarrow 26.0.0
+    Uninstalling pyarrow-26.0.0:
+      Successfully uninstalled pyarrow-26.0.0
+Successfully installed pyarrow-17.0.0
+
+[notice] A new release of pip is available: 25.0.1 -> 26.2.2
+[notice] To update, run: <repository>/.venv/bin/python -m pip install --upgrade pip

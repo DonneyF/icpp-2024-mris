@@ -1,0 +1,5 @@
+start 2026-10-31 23:37:40
+     1833.22 real      1694.64 user        73.87 sys
+          1189134336  maximum resident set size
+          1573668736  peak memory footprint
+end 2026-11-01 00:08:13 exit=0

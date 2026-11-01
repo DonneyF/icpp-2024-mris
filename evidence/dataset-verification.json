@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "source": "https://zenodo.org/records/12028115/files/packing_trace_zone_a_v1.sqlite?download=1",
+  "size_bytes": 181116928,
+  "md5": "fd7a6e124920eaeab25178f7363a5df3",
+  "sha256": "bb7e935b0bea31389b99060035f50371e384bb192baf8ed5e75b863f00b8159e",
+  "sqlite_quick_check": "ok",
+  "columns": {
+    "vm": [
+      "vmId",
+      "tenantId",
+      "vmTypeId",
+      "priority",
+      "starttime",
+      "endtime"
+    ],
+    "vmType": [
+      "id",
+      "vmTypeId",
+      "machineId",
+      "core",
+      "memory",
+      "hdd",
+      "ssd",
+      "nic"
+    ]
+  },
+  "scope": "Download/checksum/read-only schema check; no full preprocessing"
+}

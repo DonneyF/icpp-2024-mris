@@ -1,0 +1,2 @@
+System-wide memory free percentage: 50%
+System-wide memory free percentage: 48%
