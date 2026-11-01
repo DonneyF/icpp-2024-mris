@@ -1,0 +1,6 @@
+runner sha256 5cbac9bbe9ea02193a32cb29cfd81dcede39a545f626fe3ad839eeaaec455ea3
+MRIS-WSJF {"all_jobs_once": true, "valid_machine": true, "no_start_before_release": true, "capacity_respected": true, "max_capacity_excess": -9.999984840192155e-09}
+PQ-WSJF {"all_jobs_once": true, "valid_machine": true, "no_start_before_release": true, "capacity_respected": false, "max_capacity_excess": 0.9786538361538533, "capacity_respected_within_pq_isclose_tolerance": true, "max_capacity_excess_within_tolerance": -9.999997274690031e-09}
+OnlinePQ-WSJF {"all_jobs_once": true, "valid_machine": true, "no_start_before_release": true, "capacity_respected": true, "max_capacity_excess": -9.999975958407958e-09}
+Tetris-instantaneous {"all_jobs_once": true, "valid_machine": true, "no_start_before_release": true, "capacity_respected": true, "max_capacity_excess": -9.999990169262674e-09}
+BF-EXEC {"all_jobs_once": true, "valid_machine": true, "no_start_before_release": true, "capacity_respected": true, "max_capacity_excess": -9.999993721976352e-09}

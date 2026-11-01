@@ -1,0 +1,810 @@
+{
+  "status": "PASS_WITH_WARNINGS",
+  "scope": "Bounded serial run on the Azure trace; not a full paper reproduction",
+  "merged_from": [
+    {
+      "chunk": "results/member3/chunks/m10",
+      "argv": [
+        "scripts/azure_pilot.py",
+        "--output-dir",
+        "results/member3/chunks/m10",
+        "--experiment",
+        "machines",
+        "--factors",
+        "256",
+        "--machines",
+        "10",
+        "--runs",
+        "2",
+        "--max-jobs",
+        "16000"
+      ],
+      "runner_sha256": "5cbac9bbe9ea02193a32cb29cfd81dcede39a545f626fe3ad839eeaaec455ea3",
+      "git_commit": "9bd5fb7ddcdd77258413f5e774884cf3e540b3de",
+      "status": "PASS_WITH_WARNINGS",
+      "total_wall_seconds": 1655.8221827079979,
+      "peak_rss_bytes": 1587150848
+    },
+    {
+      "chunk": "results/member3/chunks/m5",
+      "argv": [
+        "scripts/azure_pilot.py",
+        "--output-dir",
+        "results/member3/chunks/m5",
+        "--experiment",
+        "machines",
+        "--factors",
+        "256",
+        "--machines",
+        "5",
+        "--runs",
+        "2",
+        "--max-jobs",
+        "16000"
+      ],
+      "runner_sha256": "5cbac9bbe9ea02193a32cb29cfd81dcede39a545f626fe3ad839eeaaec455ea3",
+      "git_commit": "9bd5fb7ddcdd77258413f5e774884cf3e540b3de",
+      "status": "PASS_WITH_WARNINGS",
+      "total_wall_seconds": 1805.987738249998,
+      "peak_rss_bytes": 1601683456
+    },
+    {
+      "chunk": "results/member3/chunks/m3",
+      "argv": [
+        "scripts/azure_pilot.py",
+        "--output-dir",
+        "results/member3/chunks/m3",
+        "--experiment",
+        "machines",
+        "--factors",
+        "256",
+        "--machines",
+        "3",
+        "--runs",
+        "2",
+        "--max-jobs",
+        "16000"
+      ],
+      "runner_sha256": "5cbac9bbe9ea02193a32cb29cfd81dcede39a545f626fe3ad839eeaaec455ea3",
+      "git_commit": "9bd5fb7ddcdd77258413f5e774884cf3e540b3de",
+      "status": "PASS_WITH_WARNINGS",
+      "total_wall_seconds": 1910.5277097090002,
+      "peak_rss_bytes": 1601880064
+    },
+    {
+      "chunk": "results/member3/chunks/m2",
+      "argv": [
+        "scripts/azure_pilot.py",
+        "--output-dir",
+        "results/member3/chunks/m2",
+        "--experiment",
+        "machines",
+        "--factors",
+        "256",
+        "--machines",
+        "2",
+        "--runs",
+        "2",
+        "--max-jobs",
+        "16000"
+      ],
+      "runner_sha256": "5cbac9bbe9ea02193a32cb29cfd81dcede39a545f626fe3ad839eeaaec455ea3",
+      "git_commit": "9bd5fb7ddcdd77258413f5e774884cf3e540b3de",
+      "status": "PASS_WITH_WARNINGS",
+      "total_wall_seconds": 2152.725809542004,
+      "peak_rss_bytes": 1598898176
+    }
+  ],
+  "config": {
+    "experiment": "machines",
+    "seed": 2026
+  },
+  "total_wall_seconds": 7525.063440209,
+  "peak_rss_bytes": 1601880064,
+  "results": [
+    {
+      "factor": 256,
+      "jobs": 16000,
+      "M": 2,
+      "R": 4,
+      "run": 1,
+      "offset": 60,
+      "release_span_days": [
+        0.0001157405786216259,
+        12.385613426100463
+      ],
+      "schedulers": {
+        "MRIS-WSJF": {
+          "awct": 26.58698330087695,
+          "wall_seconds": 871.0326509580045,
+          "cpu_seconds": 875.9440529999999,
+          "rss_after": 177176576,
+          "peak_rss_so_far": 1598898176,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.999965300266922e-09
+          }
+        },
+        "PQ-WSJF": {
+          "awct": 48.75834774259091,
+          "wall_seconds": 48.14684304199909,
+          "cpu_seconds": 48.06683500000008,
+          "rss_after": 189054976,
+          "peak_rss_so_far": 1598898176,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": false,
+            "max_capacity_excess": 2.2503205028205127,
+            "capacity_respected_within_pq_isclose_tolerance": true,
+            "max_capacity_excess_within_tolerance": -9.999986616548995e-09
+          }
+        },
+        "OnlinePQ-WSJF": {
+          "awct": 45.77346956487308,
+          "wall_seconds": 73.8906329579986,
+          "cpu_seconds": 73.81803400000001,
+          "rss_after": 197230592,
+          "peak_rss_so_far": 1598898176,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.99999905104687e-09
+          }
+        },
+        "Tetris-instantaneous": {
+          "awct": 48.97607435119376,
+          "wall_seconds": 37.99115612499736,
+          "cpu_seconds": 37.92888300000004,
+          "rss_after": 200540160,
+          "peak_rss_so_far": 1598898176,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.999945760341689e-09
+          }
+        },
+        "BF-EXEC": {
+          "awct": 48.550930168449646,
+          "wall_seconds": 100.90047616599622,
+          "cpu_seconds": 100.76162499999987,
+          "rss_after": 204144640,
+          "peak_rss_so_far": 1598898176,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.999977734764798e-09
+          }
+        }
+      },
+      "parquet": "4_scheduler_benchmark_machines_2_1.parquet",
+      "parquet_sha256": "9d262aab854fe329a589883404e13df7a48ecb33c63da42bc517342c7054817c"
+    },
+    {
+      "factor": 256,
+      "jobs": 16000,
+      "M": 2,
+      "R": 4,
+      "run": 2,
+      "offset": 163,
+      "release_span_days": [
+        0.00012731458991765976,
+        12.38574074069038
+      ],
+      "schedulers": {
+        "MRIS-WSJF": {
+          "awct": 27.864518800766675,
+          "wall_seconds": 725.4605204170002,
+          "cpu_seconds": 739.748425,
+          "rss_after": 100352000,
+          "peak_rss_so_far": 1598898176,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.9999688529806e-09
+          }
+        },
+        "PQ-WSJF": {
+          "awct": 58.99421855941132,
+          "wall_seconds": 47.240531584000564,
+          "cpu_seconds": 46.60358300000007,
+          "rss_after": 101335040,
+          "peak_rss_so_far": 1598898176,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": false,
+            "max_capacity_excess": 2.833333323333335,
+            "capacity_respected_within_pq_isclose_tolerance": true,
+            "max_capacity_excess_within_tolerance": -9.999990169262674e-09
+          }
+        },
+        "OnlinePQ-WSJF": {
+          "awct": 52.97316633728778,
+          "wall_seconds": 77.51479954200477,
+          "cpu_seconds": 77.15906200000018,
+          "rss_after": 129925120,
+          "peak_rss_so_far": 1598898176,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.999995498333192e-09
+          }
+        },
+        "Tetris-instantaneous": {
+          "awct": 66.9357448039534,
+          "wall_seconds": 42.48080783300247,
+          "cpu_seconds": 41.81738500000006,
+          "rss_after": 125485056,
+          "peak_rss_so_far": 1598898176,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.999991945619513e-09
+          }
+        },
+        "BF-EXEC": {
+          "awct": 66.93151415702063,
+          "wall_seconds": 120.9676339170037,
+          "cpu_seconds": 119.81907600000022,
+          "rss_after": 75956224,
+          "peak_rss_so_far": 1598898176,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.999990169262674e-09
+          }
+        }
+      },
+      "parquet": "4_scheduler_benchmark_machines_2_2.parquet",
+      "parquet_sha256": "d14ebb7c77e2e0ad9368a3c6d0273215e44db870172e4ff965ec7f418af958c9"
+    },
+    {
+      "factor": 256,
+      "jobs": 16000,
+      "M": 3,
+      "R": 4,
+      "run": 1,
+      "offset": 60,
+      "release_span_days": [
+        0.0001157405786216259,
+        12.385613426100463
+      ],
+      "schedulers": {
+        "MRIS-WSJF": {
+          "awct": 21.36263226158946,
+          "wall_seconds": 728.0942598749971,
+          "cpu_seconds": 739.788999,
+          "rss_after": 151650304,
+          "peak_rss_so_far": 1601880064,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.999977734764798e-09
+          }
+        },
+        "PQ-WSJF": {
+          "awct": 38.336705903239924,
+          "wall_seconds": 46.65728041600232,
+          "cpu_seconds": 46.606397000000015,
+          "rss_after": 129368064,
+          "peak_rss_so_far": 1601880064,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": false,
+            "max_capacity_excess": 3.3333333233333295,
+            "capacity_respected_within_pq_isclose_tolerance": true,
+            "max_capacity_excess_within_tolerance": -9.999991945619513e-09
+          }
+        },
+        "OnlinePQ-WSJF": {
+          "awct": 32.32641039465318,
+          "wall_seconds": 85.30008991700015,
+          "cpu_seconds": 84.92790000000002,
+          "rss_after": 211533824,
+          "peak_rss_so_far": 1601880064,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.999997274690031e-09
+          }
+        },
+        "Tetris-instantaneous": {
+          "awct": 35.82928764299152,
+          "wall_seconds": 43.407249125004455,
+          "cpu_seconds": 43.234226000000035,
+          "rss_after": 230440960,
+          "peak_rss_so_far": 1601880064,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.999990169262674e-09
+          }
+        },
+        "BF-EXEC": {
+          "awct": 34.34439158632446,
+          "wall_seconds": 90.98387287499645,
+          "cpu_seconds": 90.58559600000001,
+          "rss_after": 208945152,
+          "peak_rss_so_far": 1601880064,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.999993721976352e-09
+          }
+        }
+      },
+      "parquet": "4_scheduler_benchmark_machines_3_1.parquet",
+      "parquet_sha256": "8e777aa698e09633458ea628444691e5f66a2045880c42e4ca6d825279b34413"
+    },
+    {
+      "factor": 256,
+      "jobs": 16000,
+      "M": 3,
+      "R": 4,
+      "run": 2,
+      "offset": 163,
+      "release_span_days": [
+        0.00012731458991765976,
+        12.38574074069038
+      ],
+      "schedulers": {
+        "MRIS-WSJF": {
+          "awct": 21.918210370233137,
+          "wall_seconds": 630.9807883329995,
+          "cpu_seconds": 640.698709,
+          "rss_after": 88358912,
+          "peak_rss_so_far": 1601880064,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.999983063835316e-09
+          }
+        },
+        "PQ-WSJF": {
+          "awct": 42.75041557334492,
+          "wall_seconds": 48.24364916700142,
+          "cpu_seconds": 48.2022629999999,
+          "rss_after": 104644608,
+          "peak_rss_so_far": 1601880064,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": false,
+            "max_capacity_excess": 2.7435897335897472,
+            "capacity_respected_within_pq_isclose_tolerance": true,
+            "max_capacity_excess_within_tolerance": -9.999993721976352e-09
+          }
+        },
+        "OnlinePQ-WSJF": {
+          "awct": 36.2075914305168,
+          "wall_seconds": 89.82481820799876,
+          "cpu_seconds": 89.33145800000011,
+          "rss_after": 154484736,
+          "peak_rss_so_far": 1601880064,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.999995498333192e-09
+          }
+        },
+        "Tetris-instantaneous": {
+          "awct": 36.86275535804219,
+          "wall_seconds": 44.18857562499761,
+          "cpu_seconds": 44.10128500000019,
+          "rss_after": 184926208,
+          "peak_rss_so_far": 1601880064,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.999993721976352e-09
+          }
+        },
+        "BF-EXEC": {
+          "awct": 35.434147489549154,
+          "wall_seconds": 95.685316916999,
+          "cpu_seconds": 95.16992600000003,
+          "rss_after": 90587136,
+          "peak_rss_so_far": 1601880064,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.999988392905834e-09
+          }
+        }
+      },
+      "parquet": "4_scheduler_benchmark_machines_3_2.parquet",
+      "parquet_sha256": "65f497be74726763502126e5dd96829ea517c3e0b34f223a77f98897cbb03c6d"
+    },
+    {
+      "factor": 256,
+      "jobs": 16000,
+      "M": 5,
+      "R": 4,
+      "run": 1,
+      "offset": 60,
+      "release_span_days": [
+        0.0001157405786216259,
+        12.385613426100463
+      ],
+      "schedulers": {
+        "MRIS-WSJF": {
+          "awct": 16.724158612003578,
+          "wall_seconds": 648.5329915840048,
+          "cpu_seconds": 657.866784,
+          "rss_after": 126877696,
+          "peak_rss_so_far": 1601683456,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.999986616548995e-09
+          }
+        },
+        "PQ-WSJF": {
+          "awct": 31.513841028238414,
+          "wall_seconds": 53.656797083996935,
+          "cpu_seconds": 52.88060299999995,
+          "rss_after": 133742592,
+          "peak_rss_so_far": 1601683456,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": false,
+            "max_capacity_excess": 6.666666656666671,
+            "capacity_respected_within_pq_isclose_tolerance": true,
+            "max_capacity_excess_within_tolerance": -9.999993721976352e-09
+          }
+        },
+        "OnlinePQ-WSJF": {
+          "awct": 22.14470652510162,
+          "wall_seconds": 106.14537004199519,
+          "cpu_seconds": 104.938581,
+          "rss_after": 170180608,
+          "peak_rss_so_far": 1601683456,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.999988392905834e-09
+          }
+        },
+        "Tetris-instantaneous": {
+          "awct": 19.526903117635722,
+          "wall_seconds": 54.57825583399972,
+          "cpu_seconds": 53.81128799999999,
+          "rss_after": 179961856,
+          "peak_rss_so_far": 1601683456,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.999988392905834e-09
+          }
+        },
+        "BF-EXEC": {
+          "awct": 19.24197787975069,
+          "wall_seconds": 78.04849866699806,
+          "cpu_seconds": 77.26389900000004,
+          "rss_after": 155992064,
+          "peak_rss_so_far": 1601683456,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.999995498333192e-09
+          }
+        }
+      },
+      "parquet": "4_scheduler_benchmark_machines_5_1.parquet",
+      "parquet_sha256": "5f66018fbba05c34953b0c658d87d846747a999452cabca5d6bd310236a12db1"
+    },
+    {
+      "factor": 256,
+      "jobs": 16000,
+      "M": 5,
+      "R": 4,
+      "run": 2,
+      "offset": 163,
+      "release_span_days": [
+        0.00012731458991765976,
+        12.38574074069038
+      ],
+      "schedulers": {
+        "MRIS-WSJF": {
+          "awct": 17.56367937842873,
+          "wall_seconds": 551.914777334001,
+          "cpu_seconds": 556.268464,
+          "rss_after": 132415488,
+          "peak_rss_so_far": 1601683456,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.999986616548995e-09
+          }
+        },
+        "PQ-WSJF": {
+          "awct": 30.545806312849514,
+          "wall_seconds": 53.49689470799785,
+          "cpu_seconds": 53.12541299999998,
+          "rss_after": 186875904,
+          "peak_rss_so_far": 1601683456,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": false,
+            "max_capacity_excess": 2.9919871694871745,
+            "capacity_respected_within_pq_isclose_tolerance": true,
+            "max_capacity_excess_within_tolerance": -9.999993721976352e-09
+          }
+        },
+        "OnlinePQ-WSJF": {
+          "awct": 23.049703461271594,
+          "wall_seconds": 111.28442362499482,
+          "cpu_seconds": 110.51732700000002,
+          "rss_after": 240861184,
+          "peak_rss_so_far": 1601683456,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.999997274690031e-09
+          }
+        },
+        "Tetris-instantaneous": {
+          "awct": 24.9498135995192,
+          "wall_seconds": 56.524642958000186,
+          "cpu_seconds": 55.98737700000015,
+          "rss_after": 239550464,
+          "peak_rss_so_far": 1601683456,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.999995498333192e-09
+          }
+        },
+        "BF-EXEC": {
+          "awct": 22.803672467131516,
+          "wall_seconds": 84.4216243339979,
+          "cpu_seconds": 82.64929499999994,
+          "rss_after": 81494016,
+          "peak_rss_so_far": 1601683456,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.999993721976352e-09
+          }
+        }
+      },
+      "parquet": "4_scheduler_benchmark_machines_5_2.parquet",
+      "parquet_sha256": "231efea054906d775ed5c14ebafbc3e801be0a05c17308d222ce15a6be344fd0"
+    },
+    {
+      "factor": 256,
+      "jobs": 16000,
+      "M": 10,
+      "R": 4,
+      "run": 1,
+      "offset": 60,
+      "release_span_days": [
+        0.0001157405786216259,
+        12.385613426100463
+      ],
+      "schedulers": {
+        "MRIS-WSJF": {
+          "awct": 13.439596765573572,
+          "wall_seconds": 545.0759150410013,
+          "cpu_seconds": 553.934744,
+          "rss_after": 202473472,
+          "peak_rss_so_far": 1587150848,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.999974182051119e-09
+          }
+        },
+        "PQ-WSJF": {
+          "awct": 21.150476455144176,
+          "wall_seconds": 50.77091266600473,
+          "cpu_seconds": 50.74239399999999,
+          "rss_after": 231636992,
+          "peak_rss_so_far": 1587150848,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": false,
+            "max_capacity_excess": 0.9528846053846145,
+            "capacity_respected_within_pq_isclose_tolerance": true,
+            "max_capacity_excess_within_tolerance": -9.999990169262674e-09
+          }
+        },
+        "OnlinePQ-WSJF": {
+          "awct": 11.607997090553923,
+          "wall_seconds": 138.94408508299966,
+          "cpu_seconds": 137.457267,
+          "rss_after": 238501888,
+          "peak_rss_so_far": 1587150848,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.999993721976352e-09
+          }
+        },
+        "Tetris-instantaneous": {
+          "awct": 12.048425056883746,
+          "wall_seconds": 70.97110249999969,
+          "cpu_seconds": 70.70098800000005,
+          "rss_after": 238764032,
+          "peak_rss_so_far": 1587150848,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.999990169262674e-09
+          }
+        },
+        "BF-EXEC": {
+          "awct": 11.795223548670736,
+          "wall_seconds": 54.817621666006744,
+          "cpu_seconds": 54.66180799999995,
+          "rss_after": 241926144,
+          "peak_rss_so_far": 1587150848,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.999993721976352e-09
+          }
+        }
+      },
+      "parquet": "4_scheduler_benchmark_machines_10_1.parquet",
+      "parquet_sha256": "1948ff3de1babb18a19224cf68dc5f096b0202c447c42c518ae0a2432895327c"
+    },
+    {
+      "factor": 256,
+      "jobs": 16000,
+      "M": 10,
+      "R": 4,
+      "run": 2,
+      "offset": 163,
+      "release_span_days": [
+        0.00012731458991765976,
+        12.38574074069038
+      ],
+      "schedulers": {
+        "MRIS-WSJF": {
+          "awct": 13.84423684826822,
+          "wall_seconds": 470.1066268750001,
+          "cpu_seconds": 477.37816899999996,
+          "rss_after": 135348224,
+          "peak_rss_so_far": 1587150848,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.999983063835316e-09
+          }
+        },
+        "PQ-WSJF": {
+          "awct": 21.0534215563114,
+          "wall_seconds": 53.11315395800193,
+          "cpu_seconds": 53.0464750000001,
+          "rss_after": 236847104,
+          "peak_rss_so_far": 1587150848,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": false,
+            "max_capacity_excess": 1.7620192207692273,
+            "capacity_respected_within_pq_isclose_tolerance": true,
+            "max_capacity_excess_within_tolerance": -9.999991945619513e-09
+          }
+        },
+        "OnlinePQ-WSJF": {
+          "awct": 12.864499208597321,
+          "wall_seconds": 134.3676430409978,
+          "cpu_seconds": 134.22459000000003,
+          "rss_after": 242368512,
+          "peak_rss_so_far": 1587150848,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.999993721976352e-09
+          }
+        },
+        "Tetris-instantaneous": {
+          "awct": 13.057851961381791,
+          "wall_seconds": 74.03299591700488,
+          "cpu_seconds": 73.76152200000001,
+          "rss_after": 240893952,
+          "peak_rss_so_far": 1587150848,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.999993721976352e-09
+          }
+        },
+        "BF-EXEC": {
+          "awct": 12.605614686228655,
+          "wall_seconds": 56.32449491699663,
+          "cpu_seconds": 56.29404600000021,
+          "rss_after": 244547584,
+          "peak_rss_so_far": 1587150848,
+          "checks": {
+            "all_jobs_once": true,
+            "valid_machine": true,
+            "no_start_before_release": true,
+            "capacity_respected": true,
+            "max_capacity_excess": -9.999997274690031e-09
+          }
+        }
+      },
+      "parquet": "4_scheduler_benchmark_machines_10_2.parquet",
+      "parquet_sha256": "38b4181786eb2ec99c0c0e6ea89561410cb37b4114bf9a3ea12a13ca1a4f3af9"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+/Users/runner/work/crossbow/crossbow/arrow/cpp/src/arrow/util/cpu_info.cc:239: IOError: sysctlbyname failed for 'hw.l1dcachesize'. Detail: [errno 1] Operation not permitted
+/Users/runner/work/crossbow/crossbow/arrow/cpp/src/arrow/util/cpu_info.cc:239: IOError: sysctlbyname failed for 'hw.l2cachesize'. Detail: [errno 1] Operation not permitted
+/Users/runner/work/crossbow/crossbow/arrow/cpp/src/arrow/util/cpu_info.cc:239: IOError: sysctlbyname failed for 'hw.l3cachesize'. Detail: [errno 1] Operation not permitted
+/Users/runner/work/crossbow/crossbow/arrow/cpp/src/arrow/util/cpu_info.cc:239: IOError: sysctlbyname failed for 'hw.optional.neon'. Detail: [errno 1] Operation not permitted
+
+MRIS-WSJF:   0%|          | 0/16 [00:00<?, ?it/s][A
+                                                 [A
+MRIS-WSJF:   0%|          | 0/16 [00:00<?, ?it/s][A
+                                                 [A
+OnlinePQ-WSJF:   0%|          | 0/16 [00:00<?, ?it/s][A
+                                                     [A
+OnlinePQ-WSJF:   0%|          | 0/16 [00:00<?, ?it/s][A
+                                                     [Areal 6.44
+user 2.11
+sys 0.50

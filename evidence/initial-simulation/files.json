@@ -1,0 +1,18 @@
+{
+  "summary.json": {
+    "bytes": 21357,
+    "sha256": "e588ba4cd00b3fa0d4315f820f7d948a91d2b9ef6dd7f185e620992b1a29642d"
+  },
+  "inputs.json": {
+    "bytes": 23892,
+    "sha256": "09c112de693dc25d73f09ee0881ddc8c87890a6fceee4961d7accda75d9df465"
+  },
+  "MRIS.parquet": {
+    "bytes": 12728,
+    "sha256": "d8fd503ebd2071a09443b84ab983c75881f3a193176d818591745f5c7efb836f"
+  },
+  "OnlinePriorityQueue.parquet": {
+    "bytes": 12673,
+    "sha256": "5618df24579a74af5d1cc616fc5cc6f2f126f38ee14c3d82dce287db1f47618a"
+  }
+}
